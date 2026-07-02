@@ -1,0 +1,2504 @@
+[
+ {
+  "fr": "je",
+  "es": "yo",
+  "cat": "pronombre_sujeto"
+ },
+ {
+  "fr": "j'",
+  "es": "necesitaba, comencé, decidí",
+  "cat": "pronombre_sujeto"
+ },
+ {
+  "fr": "tu",
+  "es": "tú",
+  "cat": "pronombre_sujeto"
+ },
+ {
+  "fr": "il",
+  "es": "él",
+  "cat": "pronombre_sujeto"
+ },
+ {
+  "fr": "elle",
+  "es": "ella",
+  "cat": "pronombre_sujeto"
+ },
+ {
+  "fr": "nous",
+  "es": "nosotros",
+  "cat": "pronombre_sujeto"
+ },
+ {
+  "fr": "vous",
+  "es": "usted",
+  "cat": "pronombre_sujeto"
+ },
+ {
+  "fr": "ils",
+  "es": "ellos",
+  "cat": "pronombre_sujeto"
+ },
+ {
+  "fr": "elles",
+  "es": "ellas",
+  "cat": "pronombre_sujeto"
+ },
+ {
+  "fr": "moi aussi",
+  "es": "yo también",
+  "cat": "pronombre_tonico"
+ },
+ {
+  "fr": "toi aussi",
+  "es": "Tú también",
+  "cat": "pronombre_tonico"
+ },
+ {
+  "fr": "et toi",
+  "es": "y tú",
+  "cat": "pronombre_tonico"
+ },
+ {
+  "fr": "avec moi",
+  "es": "conmigo",
+  "cat": "pronombre_tonico"
+ },
+ {
+  "fr": "excuse-moi",
+  "es": "disculpa",
+  "cat": "expresion"
+ },
+ {
+  "fr": "excusez-moi",
+  "es": "discúlpenme, discúlpeme",
+  "cat": "expresion"
+ },
+ {
+  "fr": "mon",
+  "es": "mi",
+  "cat": "posesivo",
+  "possessive_gender": "m"
+ },
+ {
+  "fr": "ma",
+  "es": "mi",
+  "cat": "posesivo",
+  "possessive_gender": "f"
+ },
+ {
+  "fr": "mes",
+  "es": "mis",
+  "cat": "posesivo",
+  "possessive_gender": "pl"
+ },
+ {
+  "fr": "ton",
+  "es": "tu",
+  "cat": "posesivo",
+  "possessive_gender": "m"
+ },
+ {
+  "fr": "ta",
+  "es": "tu",
+  "cat": "posesivo",
+  "possessive_gender": "f"
+ },
+ {
+  "fr": "notre",
+  "es": "nuestra, nuestro, notre",
+  "cat": "posesivo",
+  "possessive_gender": "sing"
+ },
+ {
+  "fr": "votre",
+  "es": "su",
+  "cat": "posesivo",
+  "possessive_gender": "sing"
+ },
+ {
+  "fr": "mon frère",
+  "es": "mi hermano",
+  "cat": "posesivo_frase"
+ },
+ {
+  "fr": "mon fils",
+  "es": "mi hijo",
+  "cat": "posesivo_frase"
+ },
+ {
+  "fr": "ma tante",
+  "es": "mi tía",
+  "cat": "posesivo_frase"
+ },
+ {
+  "fr": "ma nièce",
+  "es": "mi sobrina",
+  "cat": "posesivo_frase"
+ },
+ {
+  "fr": "ma sœur",
+  "es": "mi hermana",
+  "cat": "posesivo_frase"
+ },
+ {
+  "fr": "le",
+  "es": "lo, el, la",
+  "cat": "articulo",
+  "gender": "m",
+  "art_type": "definido"
+ },
+ {
+  "fr": "la",
+  "es": "la, dártela",
+  "cat": "articulo",
+  "gender": "f",
+  "art_type": "definido"
+ },
+ {
+  "fr": "les",
+  "es": "los, las, recordarlas",
+  "cat": "articulo",
+  "gender": "pl",
+  "art_type": "definido"
+ },
+ {
+  "fr": "l'",
+  "es": "la, el",
+  "cat": "articulo",
+  "gender": "elidido",
+  "art_type": "definido"
+ },
+ {
+  "fr": "un",
+  "es": "un, alguna",
+  "cat": "articulo",
+  "gender": "m",
+  "art_type": "indefinido"
+ },
+ {
+  "fr": "une",
+  "es": "alguna, una, une",
+  "cat": "articulo",
+  "gender": "f",
+  "art_type": "indefinido"
+ },
+ {
+  "fr": "des",
+  "es": "de, unos, des",
+  "cat": "articulo",
+  "gender": "pl",
+  "art_type": "indefinido"
+ },
+ {
+  "fr": "du",
+  "es": "de",
+  "cat": "articulo",
+  "gender": "m",
+  "art_type": "partitivo"
+ },
+ {
+  "fr": "au",
+  "es": "en, en la, a la",
+  "cat": "articulo",
+  "gender": "m",
+  "art_type": "contraccion (à+le)"
+ },
+ {
+  "fr": "qui",
+  "es": "quién",
+  "cat": "interrogativo"
+ },
+ {
+  "fr": "où",
+  "es": "dónde",
+  "cat": "interrogativo"
+ },
+ {
+  "fr": "quoi",
+  "es": "qué",
+  "cat": "interrogativo"
+ },
+ {
+  "fr": "quand",
+  "es": "cuándo",
+  "cat": "interrogativo"
+ },
+ {
+  "fr": "comment",
+  "es": "cómo",
+  "cat": "interrogativo"
+ },
+ {
+  "fr": "pourquoi",
+  "es": "por qué",
+  "cat": "interrogativo"
+ },
+ {
+  "fr": "d'où",
+  "es": "de dónde, desde donde, de donde",
+  "cat": "interrogativo"
+ },
+ {
+  "fr": "avec qui",
+  "es": "con quién",
+  "cat": "interrogativo"
+ },
+ {
+  "fr": "combien ça coûte",
+  "es": "cuesta",
+  "cat": "interrogativo"
+ },
+ {
+  "fr": "tu connais",
+  "es": "conoces",
+  "cat": "interrogativo"
+ },
+ {
+  "fr": "comment tu t'appelles",
+  "es": "cómo te llamas",
+  "cat": "interrogativo"
+ },
+ {
+  "fr": "tu viens d'où",
+  "es": "¿De dónde vienes?, ¿De dónde eres?",
+  "cat": "interrogativo"
+ },
+ {
+  "fr": "à",
+  "es": "en, de, por",
+  "cat": "preposicion"
+ },
+ {
+  "fr": "de",
+  "es": "de",
+  "cat": "preposicion"
+ },
+ {
+  "fr": "d'",
+  "es": "de",
+  "cat": "preposicion"
+ },
+ {
+  "fr": "en",
+  "es": "allá, en, allí",
+  "cat": "preposicion"
+ },
+ {
+  "fr": "dans",
+  "es": "en",
+  "cat": "preposicion"
+ },
+ {
+  "fr": "sur",
+  "es": "sobre, encima",
+  "cat": "preposicion"
+ },
+ {
+  "fr": "avec",
+  "es": "con",
+  "cat": "preposicion"
+ },
+ {
+  "fr": "pour",
+  "es": "para",
+  "cat": "preposicion"
+ },
+ {
+  "fr": "chez",
+  "es": "casa de, a casa de, de casa de",
+  "cat": "preposicion"
+ },
+ {
+  "fr": "près de",
+  "es": "cerca de",
+  "cat": "preposicion"
+ },
+ {
+  "fr": "loin de",
+  "es": "lejos de",
+  "cat": "preposicion"
+ },
+ {
+  "fr": "devant",
+  "es": "frente a",
+  "cat": "preposicion"
+ },
+ {
+  "fr": "pendant",
+  "es": "por, durante",
+  "cat": "preposicion"
+ },
+ {
+  "fr": "près d'ici",
+  "es": "cerca de aquí, próximo a aquí, cerca de este lugar",
+  "cat": "preposicion_frase"
+ },
+ {
+  "fr": "au chocolat",
+  "es": "de chocolate",
+  "cat": "preposicion_frase"
+ },
+ {
+  "fr": "au café",
+  "es": "de café",
+  "cat": "preposicion_frase"
+ },
+ {
+  "fr": "en espèces",
+  "es": "efectivo",
+  "cat": "preposicion_frase"
+ },
+ {
+  "fr": "en général",
+  "es": "en general",
+  "cat": "preposicion_frase"
+ },
+ {
+  "fr": "à l'hôtel",
+  "es": "en el hotel, al hotel",
+  "cat": "preposicion_frase"
+ },
+ {
+  "fr": "à l'heure",
+  "es": "a tiempo",
+  "cat": "preposicion_frase"
+ },
+ {
+  "fr": "par carte",
+  "es": "con tarjeta",
+  "cat": "preposicion_frase"
+ },
+ {
+  "fr": "et",
+  "es": "y",
+  "cat": "conjuncion"
+ },
+ {
+  "fr": "ou",
+  "es": "o",
+  "cat": "conjuncion"
+ },
+ {
+  "fr": "mais",
+  "es": "pero",
+  "cat": "conjuncion"
+ },
+ {
+  "fr": "parce que",
+  "es": "porque",
+  "cat": "conjuncion"
+ },
+ {
+  "fr": "parce qu'elle",
+  "es": "porque ella, ya que ella, puesto que ella",
+  "cat": "conjuncion"
+ },
+ {
+  "fr": "parce qu'il",
+  "es": "porque él, ya que él, puesto que él",
+  "cat": "conjuncion"
+ },
+ {
+  "fr": "ah",
+  "es": "ah",
+  "cat": "interjeccion"
+ },
+ {
+  "fr": "oh",
+  "es": "ay, oh, uy",
+  "cat": "interjeccion"
+ },
+ {
+  "fr": "ouf",
+  "es": "Uf",
+  "cat": "interjeccion"
+ },
+ {
+  "fr": "miam",
+  "es": "ñam",
+  "cat": "interjeccion"
+ },
+ {
+  "fr": "oui",
+  "es": "sí",
+  "cat": "interjeccion"
+ },
+ {
+  "fr": "non",
+  "es": "no",
+  "cat": "interjeccion"
+ },
+ {
+  "fr": "d'accord",
+  "es": "de acuerdo",
+  "cat": "interjeccion"
+ },
+ {
+  "fr": "dix",
+  "es": "diez",
+  "cat": "numero"
+ },
+ {
+  "fr": "six",
+  "es": "seis",
+  "cat": "numero"
+ },
+ {
+  "fr": "quatre",
+  "es": "cuatro",
+  "cat": "numero"
+ },
+ {
+  "fr": "cinq",
+  "es": "cinco",
+  "cat": "numero"
+ },
+ {
+  "fr": "trois",
+  "es": "tres",
+  "cat": "numero"
+ },
+ {
+  "fr": "deux",
+  "es": "dos",
+  "cat": "numero"
+ },
+ {
+  "fr": "bonjour",
+  "es": "hola",
+  "cat": "expresion"
+ },
+ {
+  "fr": "bonsoir",
+  "es": "buenas tardes, buenas noches",
+  "cat": "expresion"
+ },
+ {
+  "fr": "bonne nuit",
+  "es": "buenas noches",
+  "cat": "expresion"
+ },
+ {
+  "fr": "bonne soirée",
+  "es": "buenas noches",
+  "cat": "expresion"
+ },
+ {
+  "fr": "bonne journée",
+  "es": "buen día",
+  "cat": "expresion"
+ },
+ {
+  "fr": "salut",
+  "es": "hola",
+  "cat": "expresion"
+ },
+ {
+  "fr": "au revoir",
+  "es": "adiós",
+  "cat": "expresion"
+ },
+ {
+  "fr": "à bientôt",
+  "es": "hasta pronto",
+  "cat": "expresion"
+ },
+ {
+  "fr": "à demain",
+  "es": "hasta mañana",
+  "cat": "expresion"
+ },
+ {
+  "fr": "à plus tard",
+  "es": "hasta luego",
+  "cat": "expresion"
+ },
+ {
+  "fr": "merci",
+  "es": "gracias",
+  "cat": "expresion"
+ },
+ {
+  "fr": "merci beaucoup",
+  "es": "muchas gracias",
+  "cat": "expresion"
+ },
+ {
+  "fr": "merci pour",
+  "es": "gracias por",
+  "cat": "expresion"
+ },
+ {
+  "fr": "de rien",
+  "es": "de nada",
+  "cat": "expresion"
+ },
+ {
+  "fr": "s'il te plaît",
+  "es": "por favor",
+  "cat": "expresion"
+ },
+ {
+  "fr": "s'il vous plaît",
+  "es": "por favor",
+  "cat": "expresion"
+ },
+ {
+  "fr": "pardon",
+  "es": "perdón",
+  "cat": "expresion"
+ },
+ {
+  "fr": "enchanté",
+  "es": "encantado, mucho gusto",
+  "cat": "expresion"
+ },
+ {
+  "fr": "je m'appelle",
+  "es": "me llamo, soy llamado, mi nombre es",
+  "cat": "expresion"
+ },
+ {
+  "fr": "s'appelle",
+  "es": "llamarse, se llama",
+  "cat": "expresion"
+ },
+ {
+  "fr": "il s'appelle",
+  "es": "se llama, su nombre es, él se llama",
+  "cat": "expresion"
+ },
+ {
+  "fr": "elle s'appelle",
+  "es": "ella se llama, su nombre es, se llama",
+  "cat": "expresion"
+ },
+ {
+  "fr": "ça va",
+  "es": "cómo estás",
+  "cat": "expresion"
+ },
+ {
+  "fr": "ça va bien",
+  "es": "estoy bien (frase afirm. o exclam./phrase affirm. ou exclam.), ellos/ellas están bien (frase afirm. o exclam./phrase affirm. ou exclam.), él/ella está bien (frase afirm. o exclam./phrase affirm. ou exclam.)",
+  "cat": "expresion"
+ },
+ {
+  "fr": "ça coûte",
+  "es": "cuesta, Cuesta",
+  "cat": "expresion"
+ },
+ {
+  "fr": "on y va",
+  "es": "¡Vamos!, ¡vamos!",
+  "cat": "expresion"
+ },
+ {
+  "fr": "voilà",
+  "es": "aquí está",
+  "cat": "expresion"
+ },
+ {
+  "fr": "il y a",
+  "es": "hay",
+  "cat": "expresion"
+ },
+ {
+  "fr": "c'est",
+  "es": "ser, estar, es",
+  "cat": "expresion"
+ },
+ {
+  "fr": "je ne sais pas",
+  "es": "no sé",
+  "cat": "expresion"
+ },
+ {
+  "fr": "bon appétit",
+  "es": "buen provecho",
+  "cat": "expresion"
+ },
+ {
+  "fr": "bon voyage",
+  "es": "buen viaje",
+  "cat": "expresion"
+ },
+ {
+  "fr": "joyeux anniversaire",
+  "es": "feliz cumpleaños",
+  "cat": "expresion"
+ },
+ {
+  "fr": "pas du tout",
+  "es": "para nada",
+  "cat": "expresion"
+ },
+ {
+  "fr": "je vais à",
+  "es": "voy a",
+  "cat": "expresion"
+ },
+ {
+  "fr": "vous allez à",
+  "es": "va",
+  "cat": "expresion"
+ },
+ {
+  "fr": "sommes perdus",
+  "es": "estamos perdidos",
+  "cat": "expresion"
+ },
+ {
+  "fr": "tous les jours",
+  "es": "todos los días",
+  "cat": "expresion"
+ },
+ {
+  "fr": "un peu",
+  "es": "un poco",
+  "cat": "expresion"
+ },
+ {
+  "fr": "en retard",
+  "es": "atrasado",
+  "cat": "expresion"
+ },
+ {
+  "fr": "je voudrais",
+  "es": "querría, quisiera",
+  "cat": "expresion"
+ },
+ {
+  "fr": "vous cherchez",
+  "es": "buscan, usted busca",
+  "cat": "expresion"
+ },
+ {
+  "fr": "je cherche",
+  "es": "busco, estoy buscando",
+  "cat": "expresion"
+ },
+ {
+  "fr": "Espagne",
+  "es": "España",
+  "cat": "pais"
+ },
+ {
+  "fr": "Chine",
+  "es": "China",
+  "cat": "pais"
+ },
+ {
+  "fr": "Brésil",
+  "es": "Brasil",
+  "cat": "pais"
+ },
+ {
+  "fr": "Canada",
+  "es": "Canadá",
+  "cat": "pais"
+ },
+ {
+  "fr": "Japon",
+  "es": "Japón",
+  "cat": "pais"
+ },
+ {
+  "fr": "Italie",
+  "es": "Italia",
+  "cat": "pais"
+ },
+ {
+  "fr": "Rome",
+  "es": "Roma",
+  "cat": "pais"
+ },
+ {
+  "fr": "France",
+  "es": "Francia",
+  "cat": "pais"
+ },
+ {
+  "fr": "Suisse",
+  "es": "Suiza",
+  "cat": "pais"
+ },
+ {
+  "fr": "canadien",
+  "es": "canadiense",
+  "cat": "nacionalidad",
+  "gender": "m"
+ },
+ {
+  "fr": "brésilien",
+  "es": "brasileño",
+  "cat": "nacionalidad",
+  "gender": "m"
+ },
+ {
+  "fr": "européen",
+  "es": "europeo",
+  "cat": "nacionalidad",
+  "gender": "m"
+ },
+ {
+  "fr": "américain",
+  "es": "americano",
+  "cat": "nacionalidad",
+  "gender": "m"
+ },
+ {
+  "fr": "mexicain",
+  "es": "mexicano",
+  "cat": "nacionalidad",
+  "gender": "m"
+ },
+ {
+  "fr": "japonais",
+  "es": "japoneses, japonés",
+  "cat": "nacionalidad",
+  "gender": "m"
+ },
+ {
+  "fr": "italien",
+  "es": "italiano",
+  "cat": "nacionalidad",
+  "gender": "m"
+ },
+ {
+  "fr": "chinois",
+  "es": "chino, chinos",
+  "cat": "nacionalidad",
+  "gender": "m"
+ },
+ {
+  "fr": "arabe",
+  "es": "árabe",
+  "cat": "nacionalidad",
+  "gender": "m/f"
+ },
+ {
+  "fr": "portugais",
+  "es": "portugués, portugueses",
+  "cat": "nacionalidad",
+  "gender": "m"
+ },
+ {
+  "fr": "marocain",
+  "es": "marroquí",
+  "cat": "nacionalidad",
+  "gender": "m"
+ },
+ {
+  "fr": "espagnol",
+  "es": "español",
+  "cat": "nacionalidad",
+  "gender": "m"
+ },
+ {
+  "fr": "allemand",
+  "es": "alemán",
+  "cat": "nacionalidad",
+  "gender": "m"
+ },
+ {
+  "fr": "anglais",
+  "es": "inglés",
+  "cat": "nacionalidad",
+  "gender": "m"
+ },
+ {
+  "fr": "français",
+  "es": "francés",
+  "cat": "nacionalidad",
+  "gender": "m"
+ },
+ {
+  "fr": "sommes",
+  "es": "estamos, somos, saliendo",
+  "cat": "verbo_conjugado",
+  "infinitivo": "être",
+  "persona": "nosotros"
+ },
+ {
+  "fr": "êtes",
+  "es": "(usted) es, (ustedes) están, (usted) está",
+  "cat": "verbo_conjugado",
+  "infinitivo": "être",
+  "persona": "usted/ustedes"
+ },
+ {
+  "fr": "sont",
+  "es": "son, están, saliendo",
+  "cat": "verbo_conjugado",
+  "infinitivo": "être",
+  "persona": "ellos/ellas"
+ },
+ {
+  "fr": "es",
+  "es": "eres, estás, anunciaron",
+  "cat": "verbo_conjugado",
+  "infinitivo": "être",
+  "persona": "tú"
+ },
+ {
+  "fr": "suis",
+  "es": "soy, sigues a, sigues",
+  "cat": "verbo_conjugado",
+  "infinitivo": "être",
+  "persona": "yo"
+ },
+ {
+  "fr": "est",
+  "es": "es, está",
+  "cat": "verbo_conjugado",
+  "infinitivo": "être",
+  "persona": "él/ella"
+ },
+ {
+  "fr": "ont",
+  "es": "han, tienen, cumplen",
+  "cat": "verbo_conjugado",
+  "infinitivo": "avoir",
+  "persona": "ellos/ellas"
+ },
+ {
+  "fr": "avez",
+  "es": "(ustedes) tienen, (usted) tiene",
+  "cat": "verbo_conjugado",
+  "infinitivo": "avoir",
+  "persona": "usted/ustedes"
+ },
+ {
+  "fr": "avons",
+  "es": "hemos, tenemos, supimos",
+  "cat": "verbo_conjugado",
+  "infinitivo": "avoir",
+  "persona": "nosotros"
+ },
+ {
+  "fr": "ai",
+  "es": "tengo, conversé",
+  "cat": "verbo_conjugado",
+  "infinitivo": "avoir",
+  "persona": "yo"
+ },
+ {
+  "fr": "a",
+  "es": "cumple, tiene",
+  "cat": "verbo_conjugado",
+  "infinitivo": "avoir",
+  "persona": "él/ella"
+ },
+ {
+  "fr": "j'ai",
+  "es": "yo tengo, , tengo",
+  "cat": "verbo_conjugado",
+  "infinitivo": "avoir",
+  "persona": "yo"
+ },
+ {
+  "fr": "tu as",
+  "es": "tú tienes",
+  "cat": "verbo_conjugado",
+  "infinitivo": "avoir",
+  "persona": "tú"
+ },
+ {
+  "fr": "viens",
+  "es": "soy, vengo, eres",
+  "cat": "verbo_conjugado",
+  "infinitivo": "venir",
+  "persona": "yo"
+ },
+ {
+  "fr": "vient",
+  "es": "es, viene",
+  "cat": "verbo_conjugado",
+  "infinitivo": "venir",
+  "persona": "él/ella"
+ },
+ {
+  "fr": "viennent",
+  "es": "ocurren, acaban, vienen",
+  "cat": "verbo_conjugado",
+  "infinitivo": "venir",
+  "persona": "ellos/ellas"
+ },
+ {
+  "fr": "vient de",
+  "es": "es de",
+  "cat": "verbo_conjugado",
+  "infinitivo": "venir",
+  "persona": "él/ella (venir de)"
+ },
+ {
+  "fr": "il vient",
+  "es": "viene",
+  "cat": "verbo_conjugado",
+  "infinitivo": "venir",
+  "persona": "él"
+ },
+ {
+  "fr": "elle vient",
+  "es": "viene",
+  "cat": "verbo_conjugado",
+  "infinitivo": "venir",
+  "persona": "ella"
+ },
+ {
+  "fr": "tu viens de",
+  "es": "vienes de, tú eres de",
+  "cat": "verbo_conjugado",
+  "infinitivo": "venir",
+  "persona": "tú (venir de)"
+ },
+ {
+  "fr": "viens de",
+  "es": "vengo de, soy de",
+  "cat": "verbo_conjugado",
+  "infinitivo": "venir",
+  "persona": "yo (venir de)"
+ },
+ {
+  "fr": "vais",
+  "es": "voy",
+  "cat": "verbo_conjugado",
+  "infinitivo": "aller",
+  "persona": "yo"
+ },
+ {
+  "fr": "vas",
+  "es": "vas",
+  "cat": "verbo_conjugado",
+  "infinitivo": "aller",
+  "persona": "tú"
+ },
+ {
+  "fr": "va",
+  "es": "va, queda (ropa), ve (impératif)",
+  "cat": "verbo_conjugado",
+  "infinitivo": "aller",
+  "persona": "él/ella"
+ },
+ {
+  "fr": "vont",
+  "es": "van, combinen",
+  "cat": "verbo_conjugado",
+  "infinitivo": "aller",
+  "persona": "ellos/ellas"
+ },
+ {
+  "fr": "veux",
+  "es": "quiero, quieres",
+  "cat": "verbo_conjugado",
+  "infinitivo": "vouloir",
+  "persona": "yo/tú"
+ },
+ {
+  "fr": "veut",
+  "es": "quiere",
+  "cat": "verbo_conjugado",
+  "infinitivo": "vouloir",
+  "persona": "él/ella"
+ },
+ {
+  "fr": "voulons",
+  "es": "queremos, queramos",
+  "cat": "verbo_conjugado",
+  "infinitivo": "vouloir",
+  "persona": "nosotros"
+ },
+ {
+  "fr": "voulez",
+  "es": "(ustedes) quieren, (usted) quiere",
+  "cat": "verbo_conjugado",
+  "infinitivo": "vouloir",
+  "persona": "usted/ustedes"
+ },
+ {
+  "fr": "connais",
+  "es": "conoces, conozco",
+  "cat": "verbo_conjugado",
+  "infinitivo": "connaître",
+  "persona": "yo/tú"
+ },
+ {
+  "fr": "connaissons",
+  "es": "conocemos",
+  "cat": "verbo_conjugado",
+  "infinitivo": "connaître",
+  "persona": "nosotros"
+ },
+ {
+  "fr": "connaissez",
+  "es": "conocen",
+  "cat": "verbo_conjugado",
+  "infinitivo": "connaître",
+  "persona": "usted/ustedes"
+ },
+ {
+  "fr": "j'habite",
+  "es": "habito, vivo, resido",
+  "cat": "verbo_conjugado",
+  "infinitivo": "habiter",
+  "persona": "yo"
+ },
+ {
+  "fr": "il habite",
+  "es": "habita, él habita",
+  "cat": "verbo_conjugado",
+  "infinitivo": "habiter",
+  "persona": "él"
+ },
+ {
+  "fr": "elle habite",
+  "es": "ella vive",
+  "cat": "verbo_conjugado",
+  "infinitivo": "habiter",
+  "persona": "ella"
+ },
+ {
+  "fr": "parle",
+  "es": "hable, habla",
+  "cat": "verbo_conjugado",
+  "infinitivo": "parler",
+  "persona": "él/ella"
+ },
+ {
+  "fr": "tu parles",
+  "es": "hablas, hables",
+  "cat": "verbo_conjugado",
+  "infinitivo": "parler",
+  "persona": "tú"
+ },
+ {
+  "fr": "adore",
+  "es": "le encanta, adora, le encantan",
+  "cat": "verbo_conjugado",
+  "infinitivo": "adorer",
+  "persona": "él/ella"
+ },
+ {
+  "fr": "j'étudie",
+  "es": "estudio, estudiar",
+  "cat": "verbo_conjugado",
+  "infinitivo": "étudier",
+  "persona": "yo"
+ },
+ {
+  "fr": "passer",
+  "es": "pasarte, pasarlo, prescindir",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "cuisiner",
+  "es": "cocinar",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "nager",
+  "es": "nadar",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "regarder",
+  "es": "mirar, mirara, mirarte",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "laver",
+  "es": "lavar",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "rester",
+  "es": "quedarse",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "préparer",
+  "es": "preparándoselo, entrenó, prepararla",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "discuter",
+  "es": "conversar",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "payer",
+  "es": "pagar",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "arriver",
+  "es": "llegar",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "voyager",
+  "es": "viajar",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "chercher",
+  "es": "buscar",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "chanter",
+  "es": "cantar",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "danser",
+  "es": "bailar",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "apporter",
+  "es": "traer",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "étudier",
+  "es": "estudiar",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "manger",
+  "es": "comer",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "marcher",
+  "es": "caminar",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "travailler",
+  "es": "trabajar",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "déjeuner",
+  "es": "almorzar",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "habiter",
+  "es": "habitar, vivir, casaban",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "parler",
+  "es": "hablar",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "adorer",
+  "es": "encantar",
+  "cat": "verbo_infinitivo"
+ },
+ {
+  "fr": "quelqu'un",
+  "es": "alguien",
+  "cat": "indefinido"
+ },
+ {
+  "fr": "plusieurs",
+  "es": "varios",
+  "cat": "indefinido"
+ },
+ {
+  "fr": "autre",
+  "es": "otra, otro",
+  "cat": "indefinido"
+ },
+ {
+  "fr": "comme",
+  "es": "como, cómo (pregunta)",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "beaucoup",
+  "es": "mucho",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "enfin",
+  "es": "por fin",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "vraiment",
+  "es": "realmente",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "peut-être",
+  "es": "quizás",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "parfois",
+  "es": "a veces",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "souvent",
+  "es": "a menudo",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "là-bas",
+  "es": "allí",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "loin",
+  "es": "lejos",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "aussi",
+  "es": "también",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "toujours",
+  "es": "siempre",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "très",
+  "es": "muy",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "bien",
+  "es": "bien, mucho",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "vite",
+  "es": "rápido",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "déjà",
+  "es": "ya",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "ici",
+  "es": "aquí",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "maintenant",
+  "es": "ahora",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "trop",
+  "es": "demasiado",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "demain",
+  "es": "mañana",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "aujourd'hui",
+  "es": "hoy",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "juste",
+  "es": "solo, ajustado, justa",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "bien sûr",
+  "es": "por supuesto",
+  "cat": "adverbio_frase"
+ },
+ {
+  "fr": "ce soir",
+  "es": "esta noche",
+  "cat": "expresion"
+ },
+ {
+  "fr": "parent",
+  "es": "padre",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "lit",
+  "es": "cama",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "papa",
+  "es": "papá",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "dîner",
+  "es": "cena",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "supermarché",
+  "es": "supermercado",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "légume",
+  "es": "verdura",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "travail",
+  "es": "trabajo, laboral, laborales",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "petit déjeuner",
+  "es": "desayuno",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "ingénieur",
+  "es": "ingeniero",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "docteur",
+  "es": "doctor",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "hôpital",
+  "es": "hospital",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "avocat",
+  "es": "abogado",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "métier",
+  "es": "oficio",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "plan",
+  "es": "mapa",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "vélo",
+  "es": "bicicleta",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "anniversaire",
+  "es": "cumpleaños",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "dessert",
+  "es": "postre",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "verre",
+  "es": "vaso",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "placard",
+  "es": "armario",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "couteau",
+  "es": "cuchillo",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "sucre",
+  "es": "azúcar",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "lac",
+  "es": "lago",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "pays",
+  "es": "país",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "euro",
+  "es": "euro",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "macaron",
+  "es": "macarrón",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "repas",
+  "es": "comida",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "chef",
+  "es": "jefe",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "avion",
+  "es": "avión",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "aéroport",
+  "es": "aeropuerto",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "passeport",
+  "es": "pasaporte",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "billet",
+  "es": "boleto",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "grand-père",
+  "es": "abuelo",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "ami",
+  "es": "amigo",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "cadeau",
+  "es": "regalo",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "gâteau",
+  "es": "pastel",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "appartement",
+  "es": "apartamento",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "magasin",
+  "es": "tienda",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "vendeur",
+  "es": "vendedor",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "bus",
+  "es": "autobús",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "chauffeur",
+  "es": "chofer, chófer, conductora",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "professeur",
+  "es": "profesor",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "étudiant",
+  "es": "estudiante",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "stylo",
+  "es": "boli, bolígrafo",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "livre",
+  "es": "libro",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "parc",
+  "es": "parque",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "quartier",
+  "es": "barrio",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "voisin",
+  "es": "vecino",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "restaurant",
+  "es": "restaurante, restorán",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "bureau",
+  "es": "oficina",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "copain",
+  "es": "amigo, novio, amiguito",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "chat",
+  "es": "gato",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "chien",
+  "es": "perro",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "salon",
+  "es": "sala",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "canapé",
+  "es": "sofá",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "jardin",
+  "es": "jardín",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "taxi",
+  "es": "taxi",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "portefeuille",
+  "es": "billetera (fém.), cartera (fém.), cartera",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "chargeur",
+  "es": "cargador",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "portable",
+  "es": "celular",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "sac",
+  "es": "bolsa",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "mari",
+  "es": "esposo",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "père",
+  "es": "papá",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "pull",
+  "es": "suéter",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "chapeau",
+  "es": "sombrero",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "manteau",
+  "es": "abrigo",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "neveu",
+  "es": "sobrino",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "oncle",
+  "es": "tío",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "fils",
+  "es": "hijo",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "frère",
+  "es": "hermano",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "monsieur",
+  "es": "señor",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "sandwich",
+  "es": "bocadillo, emparedado, sándwich",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "éclair",
+  "es": "relámpago, éclair",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "croissant",
+  "es": "croissant",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "café",
+  "es": "café",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "thé",
+  "es": "té",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "vacances",
+  "es": "vacaciones",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "famille",
+  "es": "familia",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "langue",
+  "es": "idioma",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "piscine",
+  "es": "piscina",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "maman",
+  "es": "mamá",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "ingénieure",
+  "es": "ingeniera",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "docteure",
+  "es": "doctora",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "entreprise",
+  "es": "empresa",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "glace",
+  "es": "hielo, helado, hielos",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "heure",
+  "es": "hora",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "minute",
+  "es": "minuto",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "gare",
+  "es": "estación",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "eau",
+  "es": "agua",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "limonade",
+  "es": "limonada",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "part",
+  "es": "porción",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "surprise",
+  "es": "sorpresa",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "serviette",
+  "es": "servilleta, toalla, serviette de table",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "fourchette",
+  "es": "tenedor",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "tasse",
+  "es": "taza",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "farine",
+  "es": "harina",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "cousine",
+  "es": "prima",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "capitale",
+  "es": "capital",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "brioche",
+  "es": "brioche",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "crêpe",
+  "es": "crepa",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "baguette",
+  "es": "baguette",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "réunion",
+  "es": "reunión",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "cheffe",
+  "es": "jefa",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "cafétéria",
+  "es": "cafetería",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "pizza",
+  "es": "pizza",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "pause",
+  "es": "descanso",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "salade",
+  "es": "ensalada, lechuga, salada",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "amie",
+  "es": "amiga",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "assiette",
+  "es": "plato",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "grand-mère",
+  "es": "abuela, viejita",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "fête",
+  "es": "fiesta",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "chambre",
+  "es": "cuarto, habitación",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "porte",
+  "es": "puerta",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "station de métro",
+  "es": "estación de metro",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "boulangerie",
+  "es": "panadería",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "vendeuse",
+  "es": "vendedora, expendedora",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "étudiante",
+  "es": "estudiante",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "professeure",
+  "es": "profesora",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "ville",
+  "es": "ciudad",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "université",
+  "es": "universidad",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "école",
+  "es": "escuela, colegio, cole",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "banque",
+  "es": "banco, banca",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "voisine",
+  "es": "vecina",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "rue",
+  "es": "calle",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "copine",
+  "es": "novia, amiga, amiguita",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "chaise",
+  "es": "silla",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "plante",
+  "es": "planta",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "cuisine",
+  "es": "cocina",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "table",
+  "es": "mesa",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "maison",
+  "es": "casa",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "voiture",
+  "es": "carro",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "valise",
+  "es": "maleta",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "clé",
+  "es": "llave",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "poche",
+  "es": "bolsillo",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "femme",
+  "es": "mujer, esposa",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "mère",
+  "es": "mamá",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "ceinture",
+  "es": "cinturón",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "cravate",
+  "es": "corbata",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "robe",
+  "es": "vestido",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "chemise",
+  "es": "camisa",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "nièce",
+  "es": "sobrina",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "tante",
+  "es": "tía",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "fille",
+  "es": "hija",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "sœur",
+  "es": "hermana",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "madame",
+  "es": "señora",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "enfant",
+  "es": "niño, niña",
+  "cat": "sustantivo",
+  "gender": "m/f"
+ },
+ {
+  "fr": "cousin",
+  "es": "primo",
+  "cat": "sustantivo",
+  "gender": "m/f"
+ },
+ {
+  "fr": "collègue",
+  "es": "colega",
+  "cat": "sustantivo",
+  "gender": "m/f"
+ },
+ {
+  "fr": "génial",
+  "es": "genial",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "beau",
+  "es": "bonito",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "nouveau",
+  "es": "nuevo",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "excellent",
+  "es": "excelente",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "chaud",
+  "es": "caliente",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "sale",
+  "es": "sucio",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "important",
+  "es": "importante",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "végétarien",
+  "es": "vegetariano",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "bon",
+  "es": "bueno, rico, buen",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "seul",
+  "es": "solo",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "fort",
+  "es": "grueso, fuerte, importante",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "cassé",
+  "es": "roto",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "fatigué",
+  "es": "cansado",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "pressé",
+  "es": "apurado",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "fermé",
+  "es": "cerrado, cerré, pegado",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "ouvert",
+  "es": "abierto",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "intelligent",
+  "es": "inteligente",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "super",
+  "es": "genial",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "noir",
+  "es": "negro",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "bleu",
+  "es": "azul, bleu, moretón",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "vert",
+  "es": "verde",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "intéressant",
+  "es": "interesante",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "méchant",
+  "es": "malvado",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "amusant",
+  "es": "divertido",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "joli",
+  "es": "bonito",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "petit",
+  "es": "pequeño",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "grand",
+  "es": "grande",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "content",
+  "es": "contento, alegro",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "prêt",
+  "es": "listo",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "lourd",
+  "es": "cargado, grave, pesado",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "perdu",
+  "es": "perdido",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "belle",
+  "es": "linda, guapa, bonita",
+  "cat": "adjetivo",
+  "gender": "f"
+ },
+ {
+  "fr": "nouvelle",
+  "es": "noticia (sustantivo), nueva",
+  "cat": "adjetivo",
+  "gender": "f"
+ },
+ {
+  "fr": "fragile",
+  "es": "frágil",
+  "cat": "adjetivo",
+  "gender": "invariable"
+ },
+ {
+  "fr": "mince",
+  "es": "vaya, delgado, caramba",
+  "cat": "adjetivo",
+  "gender": "invariable"
+ },
+ {
+  "fr": "calme",
+  "es": "tranquilo",
+  "cat": "adjetivo",
+  "gender": "invariable"
+ },
+ {
+  "fr": "propre",
+  "es": "limpio",
+  "cat": "adjetivo",
+  "gender": "invariable"
+ },
+ {
+  "fr": "cool",
+  "es": "genial, guay",
+  "cat": "adjetivo",
+  "gender": "invariable"
+ },
+ {
+  "fr": "rapide",
+  "es": "rápido, rápida",
+  "cat": "adjetivo",
+  "gender": "invariable"
+ },
+ {
+  "fr": "froid",
+  "es": "frío",
+  "cat": "adjetivo",
+  "gender": "m"
+ },
+ {
+  "fr": "avocate",
+  "es": "abogada",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "idée",
+  "es": "idea",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "invité",
+  "es": "invitado",
+  "cat": "sustantivo",
+  "gender": "m"
+ },
+ {
+  "fr": "ensemble",
+  "es": "juntos",
+  "cat": "adverbio"
+ },
+ {
+  "fr": "bienvenue",
+  "es": "bienvenido",
+  "cat": "expresion"
+ },
+ {
+  "fr": "j'adore",
+  "es": "adoro, me encanta, amo",
+  "cat": "verbo_conjugado",
+  "infinitivo": "adorer",
+  "persona": "yo"
+ },
+ {
+  "fr": "attention",
+  "es": "atención, cuidado",
+  "cat": "sustantivo",
+  "gender": "f"
+ },
+ {
+  "fr": "parfait",
+  "es": "perfecto",
+  "cat": "adjetivo",
+  "gender": "m"
+ }
+]
