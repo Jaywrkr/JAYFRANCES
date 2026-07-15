@@ -4,8 +4,10 @@ import ExercisePicker from './screens/ExercisePicker'
 import Practice from './screens/Practice'
 import Flashcards from './screens/Flashcards'
 import ManageVocab from './screens/ManageVocab'
+import Stats from './screens/Stats'
 import { loadSrs } from './lib/srs'
 import { loadCustomVocab } from './lib/customVocab'
+import { applyTheme, loadTheme, saveTheme, type Theme } from './lib/theme'
 import { VOCAB } from './data/vocab'
 import type { ExerciseType, SrsStore, VocabEntry } from './types'
 
@@ -14,16 +16,28 @@ type View =
   | { name: 'picker'; groupId: string }
   | { name: 'session'; groupId: string; exercise: ExerciseType }
   | { name: 'manageVocab' }
+  | { name: 'stats' }
 
 export default function App() {
   const [srs, setSrs] = useState<SrsStore>({})
   const [customVocab, setCustomVocab] = useState<VocabEntry[]>([])
+  const [theme, setTheme] = useState<Theme>('dark')
   const [view, setView] = useState<View>({ name: 'home' })
 
   useEffect(() => {
     setSrs(loadSrs())
     setCustomVocab(loadCustomVocab())
+    const initialTheme = loadTheme()
+    setTheme(initialTheme)
+    applyTheme(initialTheme)
   }, [])
+
+  function toggleTheme() {
+    const next = theme === 'dark' ? 'light' : 'dark'
+    setTheme(next)
+    applyTheme(next)
+    saveTheme(next)
+  }
 
   const vocab = useMemo(() => [...VOCAB, ...customVocab], [customVocab])
 
@@ -33,8 +47,11 @@ export default function App() {
         <Home
           vocab={vocab}
           srs={srs}
+          theme={theme}
+          onToggleTheme={toggleTheme}
           onSelectGroup={(groupId) => setView({ name: 'picker', groupId })}
           onManageVocab={() => setView({ name: 'manageVocab' })}
+          onShowStats={() => setView({ name: 'stats' })}
         />
       )}
 
@@ -44,6 +61,10 @@ export default function App() {
           onChange={setCustomVocab}
           onBack={() => setView({ name: 'home' })}
         />
+      )}
+
+      {view.name === 'stats' && (
+        <Stats vocab={vocab} srs={srs} onBack={() => setView({ name: 'home' })} />
       )}
 
       {view.name === 'picker' && (

@@ -60,7 +60,7 @@ export default function ManageVocab({ customVocab, onChange, onBack }: Props) {
       </p>
 
       <form onSubmit={handleSubmit} className="rounded-2xl bg-slate-900/60 border border-slate-800 p-4 flex flex-col gap-3">
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label htmlFor="fr-input" className="text-xs text-slate-400 mb-1 block">
               Francés
@@ -87,7 +87,7 @@ export default function ManageVocab({ customVocab, onChange, onBack }: Props) {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label htmlFor="cat-select" className="text-xs text-slate-400 mb-1 block">
               Categoría

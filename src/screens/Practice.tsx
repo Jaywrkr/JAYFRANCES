@@ -1,7 +1,8 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { GROUPS } from '../data/categories'
 import { generateConjugationEntries, TENSE_LABEL, type Tense } from '../data/conjugations'
 import { buildExampleSentence } from '../data/examples'
+import SessionComplete from './SessionComplete'
 import {
   buildCompletarQuestion,
   buildConjugationQuestion,
@@ -61,6 +62,7 @@ export default function Practice({ vocab, groupId, exerciseType, srs, onSrsChang
   const [textAnswer, setTextAnswer] = useState('')
   const [checked, setChecked] = useState(false)
   const [correctCount, setCorrectCount] = useState(0)
+  const [finished, setFinished] = useState(false)
   const [shake, setShake] = useState(false)
 
   const entry = session[index]
@@ -76,6 +78,33 @@ export default function Practice({ vocab, groupId, exerciseType, srs, onSrsChang
   }, [entry?.id, exerciseType])
 
   const example = useMemo(() => (entry ? buildExampleSentence(entry) : null), [entry])
+
+  useEffect(() => {
+    // El input de "completar" maneja su propio Enter (comprobar/siguiente);
+    // aquí solo cubrimos los ejercicios de opciones para no disparar doble.
+    if (!question || question.kind === 'completar') return
+    function onKeyDown(e: KeyboardEvent) {
+      if (checked) {
+        if (e.key === 'Enter') next()
+        return
+      }
+      if (question!.kind === 'mc' || question!.kind === 'conj') {
+        const n = Number(e.key)
+        const opts = (question as { options: string[] }).options
+        if (n >= 1 && n <= opts.length) handleAnswer(opts[n - 1])
+      } else if (question!.kind === 'gender') {
+        if (e.key.toLowerCase() === 'm') handleAnswer('m')
+        if (e.key.toLowerCase() === 'f') handleAnswer('f')
+      }
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checked, question])
+
+  if (finished) {
+    return <SessionComplete correct={correctCount} total={session.length} onContinue={onFinish} />
+  }
 
   if (!entry || !question) {
     return (
@@ -117,7 +146,7 @@ export default function Practice({ vocab, groupId, exerciseType, srs, onSrsChang
 
   function next() {
     if (index + 1 >= session.length) {
-      onFinish()
+      setFinished(true)
       return
     }
     setIndex((i) => i + 1)
@@ -152,7 +181,10 @@ export default function Practice({ vocab, groupId, exerciseType, srs, onSrsChang
         />
       </div>
 
-      <div className={`rounded-2xl bg-slate-900/60 border border-slate-800 p-6 ${shake ? 'shake' : ''}`}>
+      <div
+        key={entry.id}
+        className={`pop rounded-2xl bg-slate-900/60 border border-slate-800 p-6 ${shake ? 'shake' : ''}`}
+      >
         {question.kind === 'mc' && (
           <>
             <p className="text-xs text-slate-400 mb-2">{question.promptLabel}</p>
@@ -301,6 +333,11 @@ export default function Practice({ vocab, groupId, exerciseType, srs, onSrsChang
       <div className="mt-4 text-center text-xs text-slate-500">
         Aciertos en esta sesión: {correctCount} / {index + (checked ? 1 : 0)}
       </div>
+      {question.kind !== 'completar' && (
+        <p className="mt-2 text-center text-[11px] text-slate-600">
+          Atajos: {question.kind === 'gender' ? 'M / F' : `1-${question.options.length}`} para elegir · Enter para continuar
+        </p>
+      )}
     </div>
   )
 }
