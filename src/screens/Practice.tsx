@@ -21,6 +21,7 @@ interface Props {
   exerciseType: ExerciseType
   srs: SrsStore
   onSrsChange: (s: SrsStore, correct: boolean) => void
+  onSessionComplete: (correct: number, total: number) => void
   onFinish: () => void
 }
 
@@ -42,7 +43,15 @@ function selectSessionEntries(
 
 const EXTRA_TENSE_ENTRIES = generateConjugationEntries()
 
-export default function Practice({ vocab, groupId, exerciseType, srs, onSrsChange, onFinish }: Props) {
+export default function Practice({
+  vocab,
+  groupId,
+  exerciseType,
+  srs,
+  onSrsChange,
+  onSessionComplete,
+  onFinish,
+}: Props) {
   const group = GROUPS.find((g) => g.id === groupId)!
   const pool = useMemo(() => {
     const base = vocab.filter((v) => group.cats.includes(v.cat))
@@ -147,6 +156,7 @@ export default function Practice({ vocab, groupId, exerciseType, srs, onSrsChang
   function next() {
     if (index + 1 >= session.length) {
       setFinished(true)
+      onSessionComplete(correctCount, session.length)
       return
     }
     setIndex((i) => i + 1)

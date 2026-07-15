@@ -14,6 +14,7 @@ interface Props {
   onSelectGroup: (groupId: string) => void
   onManageVocab: () => void
   onShowStats: () => void
+  onShowAccount: () => void
 }
 
 export default function Home({
@@ -25,6 +26,7 @@ export default function Home({
   onSelectGroup,
   onManageVocab,
   onShowStats,
+  onShowAccount,
 }: Props) {
   const totalWords = vocab.length
   const overallEntries = vocab
@@ -85,6 +87,12 @@ export default function Home({
           className="tap-scale text-xs rounded-full border border-slate-700 px-4 py-1.5 text-slate-300 hover:border-sky-600/60"
         >
           📊 Estadísticas
+        </button>
+        <button
+          onClick={onShowAccount}
+          className="tap-scale text-xs rounded-full border border-slate-700 px-4 py-1.5 text-slate-300 hover:border-sky-600/60"
+        >
+          ☁️ Cuenta y sync
         </button>
       </div>
 
