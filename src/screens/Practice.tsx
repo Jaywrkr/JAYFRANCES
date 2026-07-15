@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { GROUPS } from '../data/categories'
-import { VOCAB } from '../data/vocab'
+import { generateConjugationEntries, TENSE_LABEL, type Tense } from '../data/conjugations'
+import { buildExampleSentence } from '../data/examples'
 import {
   buildCompletarQuestion,
   buildConjugationQuestion,
@@ -14,6 +15,7 @@ import { getState, reviewCard } from '../lib/srs'
 import type { ExerciseType, SrsStore, VocabEntry } from '../types'
 
 interface Props {
+  vocab: VocabEntry[]
   groupId: string
   exerciseType: ExerciseType
   srs: SrsStore
@@ -37,9 +39,15 @@ function selectSessionEntries(
   return pick(source, Math.min(SESSION_SIZE, source.length))
 }
 
-export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFinish }: Props) {
+const EXTRA_TENSE_ENTRIES = generateConjugationEntries()
+
+export default function Practice({ vocab, groupId, exerciseType, srs, onSrsChange, onFinish }: Props) {
   const group = GROUPS.find((g) => g.id === groupId)!
-  const pool = useMemo(() => VOCAB.filter((v) => group.cats.includes(v.cat)), [group])
+  const pool = useMemo(() => {
+    const base = vocab.filter((v) => group.cats.includes(v.cat))
+    if (exerciseType !== 'conjugacion' || !group.cats.includes('verbo_conjugado')) return base
+    return [...base, ...EXTRA_TENSE_ENTRIES]
+  }, [vocab, group, exerciseType])
   const [directionSeed] = useState(() => Math.random())
 
   const session = useMemo(
@@ -66,6 +74,8 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
     return buildCompletarQuestion(entry)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entry?.id, exerciseType])
+
+  const example = useMemo(() => (entry ? buildExampleSentence(entry) : null), [entry])
 
   if (!entry || !question) {
     return (
@@ -190,6 +200,12 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
             <p className="text-xs text-slate-400 mb-2">
               Verbo <span className="text-sky-400">{question.infinitivo}</span> — persona:{' '}
               <span className="text-sky-400">{question.persona}</span>
+              {question.tense && question.tense !== 'presente' && (
+                <>
+                  {' '}
+                  — tiempo: <span className="text-amber-400">{TENSE_LABEL[question.tense as Tense]}</span>
+                </>
+              )}
             </p>
             <h2 className="text-lg font-semibold mb-6">
               ¿Cuál es la forma correcta de "{question.infinitivo}" para "{question.persona}"?
@@ -255,6 +271,12 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
 
         {entry.es.split(',').length > 1 && checked && (
           <p className="mt-2 text-xs text-slate-500">Otros significados: {entry.es}</p>
+        )}
+
+        {checked && example && (
+          <p className="mt-2 text-xs text-slate-500">
+            Ejemplo: <span className="italic text-slate-400">{example.fr}</span>
+          </p>
         )}
 
         <div className="mt-6 flex justify-end">

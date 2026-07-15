@@ -73,6 +73,7 @@ export interface ConjugationQuestion {
   kind: 'conj'
   infinitivo: string
   persona: string
+  tense?: string
   options: string[]
   answer: string
   entry: VocabEntry
@@ -82,15 +83,23 @@ export function buildConjugationQuestion(
   entry: VocabEntry,
   pool: VocabEntry[]
 ): ConjugationQuestion {
-  const sameVerb = pool.filter(
-    (p) => p.cat === 'verbo_conjugado' && p.infinitivo === entry.infinitivo && p.id !== entry.id
+  const entryTense = entry.tense ?? 'presente'
+  const sameVerbSameTense = pool.filter(
+    (p) =>
+      p.cat === 'verbo_conjugado' &&
+      p.infinitivo === entry.infinitivo &&
+      (p.tense ?? 'presente') === entryTense &&
+      p.id !== entry.id
   )
-  const otherVerbs = pool.filter(
-    (p) => p.cat === 'verbo_conjugado' && p.infinitivo !== entry.infinitivo
+  const otherVerbsSameTense = pool.filter(
+    (p) =>
+      p.cat === 'verbo_conjugado' &&
+      p.infinitivo !== entry.infinitivo &&
+      (p.tense ?? 'presente') === entryTense
   )
-  let distractors = pick(sameVerb, Math.min(3, sameVerb.length)).map((p) => p.fr)
+  let distractors = pick(sameVerbSameTense, Math.min(3, sameVerbSameTense.length)).map((p) => p.fr)
   if (distractors.length < 3) {
-    const extra = pick(otherVerbs, 3 - distractors.length).map((p) => p.fr)
+    const extra = pick(otherVerbsSameTense, 3 - distractors.length).map((p) => p.fr)
     distractors = [...distractors, ...extra]
   }
   const options = shuffle([...new Set([entry.fr, ...distractors])])
@@ -98,6 +107,7 @@ export function buildConjugationQuestion(
     kind: 'conj',
     infinitivo: entry.infinitivo!,
     persona: entry.persona!,
+    tense: entry.tense,
     options,
     answer: entry.fr,
     entry,

@@ -1,16 +1,17 @@
 import { GROUPS } from '../data/categories'
-import { VOCAB } from '../data/vocab'
 import { groupMastery } from '../lib/progress'
-import type { SrsStore } from '../types'
+import type { SrsStore, VocabEntry } from '../types'
 
 interface Props {
+  vocab: VocabEntry[]
   srs: SrsStore
   onSelectGroup: (groupId: string) => void
+  onManageVocab: () => void
 }
 
-export default function Home({ srs, onSelectGroup }: Props) {
-  const totalWords = VOCAB.length
-  const overallEntries = VOCAB
+export default function Home({ vocab, srs, onSelectGroup, onManageVocab }: Props) {
+  const totalWords = vocab.length
+  const overallEntries = vocab
   const overallMastery = groupMastery(srs, overallEntries)
 
   return (
@@ -35,9 +36,18 @@ export default function Home({ srs, onSelectGroup }: Props) {
         </div>
       </header>
 
+      <div className="flex justify-center mb-4">
+        <button
+          onClick={onManageVocab}
+          className="tap-scale text-xs rounded-full border border-slate-700 px-4 py-1.5 text-slate-300 hover:border-sky-600/60"
+        >
+          + Mi vocabulario
+        </button>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {GROUPS.map((g) => {
-          const entries = VOCAB.filter((v) => g.cats.includes(v.cat))
+          const entries = vocab.filter((v) => g.cats.includes(v.cat))
           const mastery = groupMastery(srs, entries)
           return (
             <button

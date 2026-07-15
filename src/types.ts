@@ -45,6 +45,7 @@ export interface VocabEntry {
   possessive_gender?: string
   infinitivo?: string
   persona?: string
+  tense?: string
   id: string
 }
 

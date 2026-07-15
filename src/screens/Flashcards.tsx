@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react'
 import { GROUPS } from '../data/categories'
-import { VOCAB } from '../data/vocab'
+import { buildExampleSentence } from '../data/examples'
 import { pick } from '../lib/exercises'
 import { getState, masteryLabel, reviewCard } from '../lib/srs'
-import type { SrsStore } from '../types'
+import type { SrsStore, VocabEntry } from '../types'
 
 interface Props {
+  vocab: VocabEntry[]
   groupId: string
   srs: SrsStore
   onSrsChange: (s: SrsStore) => void
@@ -14,9 +15,9 @@ interface Props {
 
 const SESSION_SIZE = 15
 
-export default function Flashcards({ groupId, srs, onSrsChange, onFinish }: Props) {
+export default function Flashcards({ vocab, groupId, srs, onSrsChange, onFinish }: Props) {
   const group = GROUPS.find((g) => g.id === groupId)!
-  const pool = useMemo(() => VOCAB.filter((v) => group.cats.includes(v.cat)), [group])
+  const pool = useMemo(() => vocab.filter((v) => group.cats.includes(v.cat)), [vocab, group])
 
   const session = useMemo(() => {
     const due = pool.filter((e) => getState(srs, e.id).box < 5)
@@ -43,6 +44,7 @@ export default function Flashcards({ groupId, srs, onSrsChange, onFinish }: Prop
   }
 
   const state = getState(srs, entry.id)
+  const example = buildExampleSentence(entry)
 
   function grade(correct: boolean) {
     onSrsChange(reviewCard(srs, entry.id, correct))
@@ -105,6 +107,9 @@ export default function Flashcards({ groupId, srs, onSrsChange, onFinish }: Prop
           <>
             <h2 className="text-2xl font-bold text-sky-400">{entry.es}</h2>
             <p className="text-slate-500 text-sm mt-3">{entry.fr}</p>
+            {example && (
+              <p className="text-slate-500 text-xs mt-4 italic">Ejemplo: {example.fr}</p>
+            )}
           </>
         )}
         {!flipped && <p className="text-xs text-slate-500 mt-4">Toca para ver la traducción</p>}
