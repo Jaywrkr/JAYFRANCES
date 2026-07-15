@@ -56,8 +56,18 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
   const [shake, setShake] = useState(false)
 
   const entry = session[index]
+  const direction = (index + (directionSeed > 0.5 ? 1 : 0)) % 2 === 0 ? 'fr2es' : 'es2fr'
 
-  if (!entry) {
+  const question = useMemo(() => {
+    if (!entry) return null
+    if (exerciseType === 'opcion_multiple') return buildMultipleChoice(entry, pool, direction)
+    if (exerciseType === 'genero') return buildGenderQuestion(entry)
+    if (exerciseType === 'conjugacion') return buildConjugationQuestion(entry, pool)
+    return buildCompletarQuestion(entry)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [entry?.id, exerciseType])
+
+  if (!entry || !question) {
     return (
       <div className="max-w-xl mx-auto px-4 pt-16 text-center">
         <p className="text-slate-300">No hay suficientes palabras en esta categoría todavía.</p>
@@ -68,21 +78,12 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
     )
   }
 
-  const direction = (index + (directionSeed > 0.5 ? 1 : 0)) % 2 === 0 ? 'fr2es' : 'es2fr'
-
-  const question = useMemo(() => {
-    if (exerciseType === 'opcion_multiple') return buildMultipleChoice(entry, pool, direction)
-    if (exerciseType === 'genero') return buildGenderQuestion(entry)
-    if (exerciseType === 'conjugacion') return buildConjugationQuestion(entry, pool)
-    return buildCompletarQuestion(entry)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [entry.id, exerciseType])
-
   function isCorrect(): boolean {
-    if (question.kind === 'mc') return selected === question.answer
-    if (question.kind === 'gender') return selected === question.answer
-    if (question.kind === 'conj') return selected === question.answer
-    if (question.kind === 'completar') return normalize(textAnswer) === normalize(question.answer)
+    const q = question!
+    if (q.kind === 'mc') return selected === q.answer
+    if (q.kind === 'gender') return selected === q.answer
+    if (q.kind === 'conj') return selected === q.answer
+    if (q.kind === 'completar') return normalize(textAnswer) === normalize(q.answer)
     return false
   }
 
@@ -90,10 +91,11 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
     if (checked) return
     if (choice !== null) setSelected(choice)
     setChecked(true)
+    const q = question!
     const correct =
-      question.kind === 'completar'
-        ? normalize(textAnswer) === normalize(question.answer)
-        : choice === (question as { answer: string }).answer
+      q.kind === 'completar'
+        ? normalize(textAnswer) === normalize(q.answer)
+        : choice === (q as { answer: string }).answer
     if (correct) {
       setCorrectCount((c) => c + 1)
     } else {
@@ -119,14 +121,21 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
   return (
     <div className="max-w-xl mx-auto px-4 pb-16 pt-6">
       <div className="flex items-center justify-between mb-4">
-        <button onClick={onFinish} className="text-slate-400 text-sm tap-scale">
+        <button onClick={onFinish} className="text-slate-400 text-sm tap-scale" aria-label="Salir de la sesión">
           ✕ Salir
         </button>
-        <div className="text-xs text-slate-400">
+        <div className="text-xs text-slate-400" aria-live="polite">
           {index + 1} / {session.length}
         </div>
       </div>
-      <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden mb-8">
+      <div
+        className="h-1.5 rounded-full bg-slate-800 overflow-hidden mb-8"
+        role="progressbar"
+        aria-valuenow={progressPct}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label="Progreso de la sesión"
+      >
         <div
           className="h-full bg-sky-500 rounded-full transition-all"
           style={{ width: `${progressPct}%` }}
@@ -202,9 +211,12 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
 
         {question.kind === 'completar' && (
           <>
-            <p className="text-xs text-slate-400 mb-2">Escribe en francés:</p>
+            <label htmlFor="completar-input" className="text-xs text-slate-400 mb-2 block">
+              Escribe en francés:
+            </label>
             <h2 className="text-2xl font-semibold mb-6">{question.hintEs}</h2>
             <input
+              id="completar-input"
               autoFocus
               disabled={checked}
               value={textAnswer}
@@ -216,10 +228,11 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
                 }
               }}
               placeholder="tu respuesta..."
+              aria-label="Tu respuesta en francés"
               className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-lg outline-none focus:border-sky-500"
             />
             {checked && (
-              <p className={`mt-3 text-sm ${isCorrect() ? 'text-emerald-400' : 'text-rose-400'}`}>
+              <p role="status" className={`mt-3 text-sm ${isCorrect() ? 'text-emerald-400' : 'text-rose-400'}`}>
                 {isCorrect() ? '¡Correcto!' : `Respuesta correcta: ${question.answer}`}
               </p>
             )}
@@ -227,7 +240,7 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
         )}
 
         {checked && question.kind !== 'completar' && (
-          <p className={`mt-4 text-sm ${isCorrect() ? 'text-emerald-400' : 'text-rose-400'}`}>
+          <p role="status" className={`mt-4 text-sm ${isCorrect() ? 'text-emerald-400' : 'text-rose-400'}`}>
             {isCorrect()
               ? '¡Correcto!'
               : `Respuesta correcta: ${
@@ -295,7 +308,8 @@ function OptionButton({
     <button
       disabled={checked}
       onClick={onClick}
-      className={`tap-scale text-left rounded-lg border px-4 py-3 transition-colors ${cls}`}
+      aria-pressed={selected}
+      className={`tap-scale text-left rounded-lg border px-4 py-3 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400 ${cls}`}
     >
       {label}
     </button>

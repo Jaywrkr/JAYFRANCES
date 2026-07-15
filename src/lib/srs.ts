@@ -16,7 +16,12 @@ export function loadSrs(): SrsStore {
 }
 
 export function saveSrs(store: SrsStore) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(store))
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(store))
+  } catch {
+    // localStorage puede fallar por cuota llena o modo privado; el progreso
+    // sigue funcionando en memoria durante la sesión aunque no se persista.
+  }
 }
 
 export function getState(store: SrsStore, id: string): SrsState {
