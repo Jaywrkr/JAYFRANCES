@@ -20,7 +20,7 @@ interface Props {
   groupId: string
   exerciseType: ExerciseType
   srs: SrsStore
-  onSrsChange: (s: SrsStore) => void
+  onSrsChange: (s: SrsStore, correct: boolean) => void
   onFinish: () => void
 }
 
@@ -141,7 +141,7 @@ export default function Practice({ vocab, groupId, exerciseType, srs, onSrsChang
       setShake(true)
       setTimeout(() => setShake(false), 400)
     }
-    onSrsChange(reviewCard(srs, entry.id, correct))
+    onSrsChange(reviewCard(srs, entry.id, correct), correct)
   }
 
   function next() {

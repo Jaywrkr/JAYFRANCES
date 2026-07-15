@@ -8,6 +8,8 @@ import Stats from './screens/Stats'
 import { loadSrs } from './lib/srs'
 import { loadCustomVocab } from './lib/customVocab'
 import { applyTheme, loadTheme, saveTheme, type Theme } from './lib/theme'
+import { loadStreak, recordActivityToday, type StreakData } from './lib/streak'
+import { recordReview } from './lib/activityLog'
 import { VOCAB } from './data/vocab'
 import type { ExerciseType, SrsStore, VocabEntry } from './types'
 
@@ -22,11 +24,13 @@ export default function App() {
   const [srs, setSrs] = useState<SrsStore>({})
   const [customVocab, setCustomVocab] = useState<VocabEntry[]>([])
   const [theme, setTheme] = useState<Theme>('dark')
+  const [streak, setStreak] = useState<StreakData>({ lastActiveDate: '', currentStreak: 0, longestStreak: 0 })
   const [view, setView] = useState<View>({ name: 'home' })
 
   useEffect(() => {
     setSrs(loadSrs())
     setCustomVocab(loadCustomVocab())
+    setStreak(loadStreak())
     const initialTheme = loadTheme()
     setTheme(initialTheme)
     applyTheme(initialTheme)
@@ -39,6 +43,12 @@ export default function App() {
     saveTheme(next)
   }
 
+  function handleSrsChange(next: SrsStore, correct: boolean) {
+    setSrs(next)
+    recordReview(correct)
+    setStreak(recordActivityToday())
+  }
+
   const vocab = useMemo(() => [...VOCAB, ...customVocab], [customVocab])
 
   return (
@@ -48,6 +58,7 @@ export default function App() {
           vocab={vocab}
           srs={srs}
           theme={theme}
+          streak={streak}
           onToggleTheme={toggleTheme}
           onSelectGroup={(groupId) => setView({ name: 'picker', groupId })}
           onManageVocab={() => setView({ name: 'manageVocab' })}
@@ -64,7 +75,13 @@ export default function App() {
       )}
 
       {view.name === 'stats' && (
-        <Stats vocab={vocab} srs={srs} onBack={() => setView({ name: 'home' })} />
+        <Stats
+          vocab={vocab}
+          srs={srs}
+          streak={streak}
+          customVocabCount={customVocab.length}
+          onBack={() => setView({ name: 'home' })}
+        />
       )}
 
       {view.name === 'picker' && (
@@ -81,7 +98,7 @@ export default function App() {
           vocab={vocab}
           groupId={view.groupId}
           srs={srs}
-          onSrsChange={setSrs}
+          onSrsChange={handleSrsChange}
           onFinish={() => setView({ name: 'picker', groupId: view.groupId })}
         />
       )}
@@ -92,7 +109,7 @@ export default function App() {
           groupId={view.groupId}
           exerciseType={view.exercise}
           srs={srs}
-          onSrsChange={setSrs}
+          onSrsChange={handleSrsChange}
           onFinish={() => setView({ name: 'picker', groupId: view.groupId })}
         />
       )}
