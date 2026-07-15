@@ -60,14 +60,21 @@ export default function Flashcards({ groupId, srs, onSrsChange, onFinish }: Prop
   return (
     <div className="max-w-xl mx-auto px-4 pb-16 pt-6">
       <div className="flex items-center justify-between mb-4">
-        <button onClick={onFinish} className="text-slate-400 text-sm tap-scale">
+        <button onClick={onFinish} className="text-slate-400 text-sm tap-scale" aria-label="Salir de la sesión">
           ✕ Salir
         </button>
-        <div className="text-xs text-slate-400">
+        <div className="text-xs text-slate-400" aria-live="polite">
           {index + 1} / {session.length}
         </div>
       </div>
-      <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden mb-8">
+      <div
+        className="h-1.5 rounded-full bg-slate-800 overflow-hidden mb-8"
+        role="progressbar"
+        aria-valuenow={progressPct}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label="Progreso de la sesión"
+      >
         <div
           className="h-full bg-sky-500 rounded-full transition-all"
           style={{ width: `${progressPct}%` }}
@@ -76,7 +83,17 @@ export default function Flashcards({ groupId, srs, onSrsChange, onFinish }: Prop
 
       <div
         onClick={() => setFlipped((f) => !f)}
-        className="cursor-pointer select-none rounded-2xl bg-slate-900/60 border border-slate-800 p-10 min-h-[220px] flex flex-col items-center justify-center text-center pop"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            setFlipped((f) => !f)
+          }
+        }}
+        role="button"
+        tabIndex={0}
+        aria-pressed={flipped}
+        aria-label={flipped ? 'Ver palabra en francés' : 'Ver traducción'}
+        className="cursor-pointer select-none rounded-2xl bg-slate-900/60 border border-slate-800 p-10 min-h-[220px] flex flex-col items-center justify-center text-center pop focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500"
         key={entry.id}
       >
         <span className="text-[10px] uppercase tracking-wide text-slate-500 mb-3">
@@ -97,13 +114,15 @@ export default function Flashcards({ groupId, srs, onSrsChange, onFinish }: Prop
         <div className="grid grid-cols-2 gap-3 mt-4">
           <button
             onClick={() => grade(false)}
-            className="tap-scale rounded-xl bg-rose-600/20 border border-rose-600/40 text-rose-300 py-3 font-medium"
+            aria-label="No sabía esta palabra"
+            className="tap-scale rounded-xl bg-rose-600/20 border border-rose-600/40 text-rose-300 py-3 font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-rose-400"
           >
             😕 No la sabía
           </button>
           <button
             onClick={() => grade(true)}
-            className="tap-scale rounded-xl bg-emerald-600/20 border border-emerald-600/40 text-emerald-300 py-3 font-medium"
+            aria-label="Sí sabía esta palabra"
+            className="tap-scale rounded-xl bg-emerald-600/20 border border-emerald-600/40 text-emerald-300 py-3 font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-400"
           >
             😄 La sabía
           </button>
