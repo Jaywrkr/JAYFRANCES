@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { GROUPS } from '../data/categories'
 import { buildExampleSentence } from '../data/examples'
 import { pick } from '../lib/exercises'
-import { getState, masteryLabel, reviewCard } from '../lib/srs'
+import { getState, isMastered, masteryLabel, reviewCard } from '../lib/srs'
 import type { SrsStore, VocabEntry } from '../types'
 
 interface Props {
@@ -20,7 +20,7 @@ export default function Flashcards({ vocab, groupId, srs, onSrsChange, onFinish 
   const pool = useMemo(() => vocab.filter((v) => group.cats.includes(v.cat)), [vocab, group])
 
   const session = useMemo(() => {
-    const due = pool.filter((e) => getState(srs, e.id).box < 5)
+    const due = pool.filter((e) => !isMastered(getState(srs, e.id)))
     const source = due.length >= 5 ? due : pool
     return pick(source, Math.min(SESSION_SIZE, source.length))
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -99,7 +99,7 @@ export default function Flashcards({ vocab, groupId, srs, onSrsChange, onFinish 
         key={entry.id}
       >
         <span className="text-[10px] uppercase tracking-wide text-slate-500 mb-3">
-          {masteryLabel(state.box)}
+          {masteryLabel(state.repetitions)}
         </span>
         {!flipped ? (
           <h2 className="text-3xl font-bold">{entry.fr}</h2>
