@@ -10,7 +10,7 @@ interface Props {
   vocab: VocabEntry[]
   groupId: string
   srs: SrsStore
-  onSrsChange: (s: SrsStore) => void
+  onSrsChange: (s: SrsStore, correct: boolean) => void
   onFinish: () => void
 }
 
@@ -64,7 +64,7 @@ export default function Flashcards({ vocab, groupId, srs, onSrsChange, onFinish 
   const example = buildExampleSentence(entry)
 
   function grade(correct: boolean) {
-    onSrsChange(reviewCard(srs, entry.id, correct))
+    onSrsChange(reviewCard(srs, entry.id, correct), correct)
     if (correct) setKnown((k) => k + 1)
     if (index + 1 >= session.length) {
       setFinished(true)

@@ -2,12 +2,14 @@ import { GROUPS } from '../data/categories'
 import { groupMastery } from '../lib/progress'
 import { isDue } from '../lib/srs'
 import type { Theme } from '../lib/theme'
+import type { StreakData } from '../lib/streak'
 import type { SrsStore, VocabEntry } from '../types'
 
 interface Props {
   vocab: VocabEntry[]
   srs: SrsStore
   theme: Theme
+  streak: StreakData
   onToggleTheme: () => void
   onSelectGroup: (groupId: string) => void
   onManageVocab: () => void
@@ -18,6 +20,7 @@ export default function Home({
   vocab,
   srs,
   theme,
+  streak,
   onToggleTheme,
   onSelectGroup,
   onManageVocab,
@@ -49,6 +52,11 @@ export default function Home({
         {dueCount > 0 && (
           <p className="text-amber-400 text-sm mt-2 font-medium">
             📌 {dueCount} {dueCount === 1 ? 'palabra lista' : 'palabras listas'} para repasar hoy
+          </p>
+        )}
+        {streak.currentStreak > 0 && (
+          <p className="text-orange-400 text-sm mt-1 font-medium">
+            🔥 Racha de {streak.currentStreak} {streak.currentStreak === 1 ? 'día' : 'días'}
           </p>
         )}
         <div className="mt-4 mx-auto max-w-xs">
