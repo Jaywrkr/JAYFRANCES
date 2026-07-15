@@ -1,29 +1,44 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { getState, isDue, loadSrs, masteryLabel, reviewCard, saveSrs } from './srs'
+import { getState, isDue, isMastered, loadSrs, masteryLabel, reviewCard, saveSrs } from './srs'
 
-describe('srs', () => {
+describe('srs (SM-2)', () => {
   beforeEach(() => {
     localStorage.clear()
   })
 
   it('returns a default state for unseen cards', () => {
     const state = getState({}, 'bonjour')
-    expect(state).toEqual({ box: 0, dueAt: 0, seen: 0, correct: 0 })
+    expect(state).toEqual({ repetitions: 0, easeFactor: 2.5, intervalDays: 0, dueAt: 0, seen: 0, correct: 0 })
   })
 
-  it('advances the box on a correct review and resets on a miss', () => {
+  it('grows repetitions and interval on consecutive correct reviews', () => {
     let store = reviewCard({}, 'chat', true)
-    expect(getState(store, 'chat').box).toBe(1)
+    expect(getState(store, 'chat').repetitions).toBe(1)
+    expect(getState(store, 'chat').intervalDays).toBe(1)
+
     store = reviewCard(store, 'chat', true)
-    expect(getState(store, 'chat').box).toBe(2)
-    store = reviewCard(store, 'chat', false)
-    expect(getState(store, 'chat').box).toBe(0)
+    expect(getState(store, 'chat').repetitions).toBe(2)
+    expect(getState(store, 'chat').intervalDays).toBe(6)
+
+    store = reviewCard(store, 'chat', true)
+    expect(getState(store, 'chat').repetitions).toBe(3)
+    expect(getState(store, 'chat').intervalDays).toBeGreaterThan(6)
   })
 
-  it('never advances the box past the max', () => {
+  it('resets repetitions and shortens the interval on a miss', () => {
+    let store = reviewCard({}, 'chien', true)
+    store = reviewCard(store, 'chien', true)
+    store = reviewCard(store, 'chien', false)
+    const state = getState(store, 'chien')
+    expect(state.repetitions).toBe(0)
+    expect(state.intervalDays).toBe(0)
+    expect(state.dueAt).toBeLessThanOrEqual(Date.now() + 10 * 60_000 + 1000)
+  })
+
+  it('never lets the ease factor drop below the SM-2 floor', () => {
     let store = {}
-    for (let i = 0; i < 10; i++) store = reviewCard(store, 'chien', true)
-    expect(getState(store, 'chien').box).toBeLessThanOrEqual(5)
+    for (let i = 0; i < 20; i++) store = reviewCard(store, 'difficile', false)
+    expect(getState(store, 'difficile').easeFactor).toBeGreaterThanOrEqual(1.3)
   })
 
   it('tracks seen and correct counts', () => {
@@ -54,7 +69,28 @@ describe('srs', () => {
     expect(loadSrs()).toEqual({})
   })
 
-  it('labels mastery from the box number', () => {
+  it('migrates legacy Leitner-format entries on load', () => {
+    localStorage.setItem(
+      'jayfrances_srs_v1',
+      JSON.stringify({ chat: { box: 3, dueAt: 12345, seen: 4, correct: 3 } })
+    )
+    const loaded = loadSrs()
+    expect(loaded.chat).toEqual({
+      repetitions: 3,
+      easeFactor: 2.5,
+      intervalDays: 2,
+      dueAt: 12345,
+      seen: 4,
+      correct: 3,
+    })
+  })
+
+  it('flags mastery once repetitions reach the threshold', () => {
+    expect(isMastered({ repetitions: 5, easeFactor: 2.5, intervalDays: 30, dueAt: 0, seen: 5, correct: 5 })).toBe(true)
+    expect(isMastered({ repetitions: 4, easeFactor: 2.5, intervalDays: 12, dueAt: 0, seen: 4, correct: 4 })).toBe(false)
+  })
+
+  it('labels mastery from the repetitions count', () => {
     expect(masteryLabel(0)).toBe('Nuevo')
     expect(masteryLabel(2)).toBe('Aprendiendo')
     expect(masteryLabel(4)).toBe('Repasando')

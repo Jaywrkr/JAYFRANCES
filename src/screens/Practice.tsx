@@ -11,7 +11,7 @@ import {
   normalize,
   pick,
 } from '../lib/exercises'
-import { getState, reviewCard } from '../lib/srs'
+import { getState, isMastered, reviewCard } from '../lib/srs'
 import type { ExerciseType, SrsStore, VocabEntry } from '../types'
 
 interface Props {
@@ -34,7 +34,7 @@ function selectSessionEntries(
   if (exerciseType === 'genero') candidates = pool.filter(isGenderable)
   if (exerciseType === 'conjugacion') candidates = pool.filter((e) => e.cat === 'verbo_conjugado')
 
-  const due = candidates.filter((e) => getState(srs, e.id).box < 5)
+  const due = candidates.filter((e) => !isMastered(getState(srs, e.id)))
   const source = due.length >= 4 ? due : candidates
   return pick(source, Math.min(SESSION_SIZE, source.length))
 }

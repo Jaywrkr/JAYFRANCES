@@ -1,15 +1,41 @@
-import type { SrsState, SrsStore } from '../types'
+import type { LegacySrsState, SrsState, SrsStore } from '../types'
 
 const STORAGE_KEY = 'jayfrances_srs_v1'
 
-// Intervalos tipo Leitner, en minutos, por caja (0 = recién vista / fallada)
-const BOX_INTERVAL_MIN = [0, 10, 60 * 8, 60 * 24 * 2, 60 * 24 * 5, 60 * 24 * 12]
-const MAX_BOX = BOX_INTERVAL_MIN.length - 1
+const DEFAULT_EASE = 2.5
+const MIN_EASE = 1.3
+const FAIL_RELEARN_MINUTES = 10
+const DAY_MS = 24 * 60 * 60 * 1000
+export const MASTERED_REPETITIONS = 5
+
+function isLegacyState(s: unknown): s is LegacySrsState {
+  return typeof s === 'object' && s !== null && 'box' in s && !('repetitions' in s)
+}
+
+// Convierte una entrada del formato Leitner viejo a un estado SM-2 equivalente,
+// para no perder el progreso guardado en localStorage de sesiones anteriores.
+function migrateLegacy(legacy: LegacySrsState): SrsState {
+  const LEGACY_INTERVAL_DAYS = [0, 0, 8 / 24, 2, 5, 12]
+  return {
+    repetitions: legacy.box,
+    easeFactor: DEFAULT_EASE,
+    intervalDays: LEGACY_INTERVAL_DAYS[legacy.box] ?? 0,
+    dueAt: legacy.dueAt,
+    seen: legacy.seen,
+    correct: legacy.correct,
+  }
+}
 
 export function loadSrs(): SrsStore {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
-    return raw ? (JSON.parse(raw) as SrsStore) : {}
+    if (!raw) return {}
+    const parsed = JSON.parse(raw) as Record<string, SrsState | LegacySrsState>
+    const migrated: SrsStore = {}
+    for (const [id, state] of Object.entries(parsed)) {
+      migrated[id] = isLegacyState(state) ? migrateLegacy(state) : (state as SrsState)
+    }
+    return migrated
   } catch {
     return {}
   }
@@ -25,15 +51,39 @@ export function saveSrs(store: SrsStore) {
 }
 
 export function getState(store: SrsStore, id: string): SrsState {
-  return store[id] ?? { box: 0, dueAt: 0, seen: 0, correct: 0 }
+  return store[id] ?? { repetitions: 0, easeFactor: DEFAULT_EASE, intervalDays: 0, dueAt: 0, seen: 0, correct: 0 }
 }
 
+// Algoritmo SM-2 (SuperMemo 2), con calidad binaria: correcto = 4, incorrecto = 2.
 export function reviewCard(store: SrsStore, id: string, correct: boolean): SrsStore {
   const cur = getState(store, id)
-  const nextBox = correct ? Math.min(cur.box + 1, MAX_BOX) : 0
-  const dueAt = Date.now() + BOX_INTERVAL_MIN[nextBox] * 60_000
+  const quality = correct ? 4 : 2
+
+  const easeFactor = Math.max(
+    MIN_EASE,
+    cur.easeFactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02))
+  )
+
+  let repetitions: number
+  let intervalDays: number
+  let dueAt: number
+
+  if (!correct) {
+    repetitions = 0
+    intervalDays = 0
+    dueAt = Date.now() + FAIL_RELEARN_MINUTES * 60_000
+  } else {
+    repetitions = cur.repetitions + 1
+    if (repetitions === 1) intervalDays = 1
+    else if (repetitions === 2) intervalDays = 6
+    else intervalDays = Math.round(cur.intervalDays * easeFactor)
+    dueAt = Date.now() + intervalDays * DAY_MS
+  }
+
   const next: SrsState = {
-    box: nextBox,
+    repetitions,
+    easeFactor,
+    intervalDays,
     dueAt,
     seen: cur.seen + 1,
     correct: cur.correct + (correct ? 1 : 0),
@@ -49,9 +99,13 @@ export function isDue(store: SrsStore, id: string): boolean {
   return s.dueAt <= Date.now()
 }
 
-export function masteryLabel(box: number): string {
-  if (box === 0) return 'Nuevo'
-  if (box <= 2) return 'Aprendiendo'
-  if (box <= 4) return 'Repasando'
+export function isMastered(state: SrsState): boolean {
+  return state.repetitions >= MASTERED_REPETITIONS
+}
+
+export function masteryLabel(repetitions: number): string {
+  if (repetitions === 0) return 'Nuevo'
+  if (repetitions <= 2) return 'Aprendiendo'
+  if (repetitions <= 4) return 'Repasando'
   return 'Dominado'
 }
