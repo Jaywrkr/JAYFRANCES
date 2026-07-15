@@ -11,12 +11,20 @@ interface Props {
   groupId: string
   srs: SrsStore
   onSrsChange: (s: SrsStore, correct: boolean) => void
+  onSessionComplete: (correct: number, total: number) => void
   onFinish: () => void
 }
 
 const SESSION_SIZE = 15
 
-export default function Flashcards({ vocab, groupId, srs, onSrsChange, onFinish }: Props) {
+export default function Flashcards({
+  vocab,
+  groupId,
+  srs,
+  onSrsChange,
+  onSessionComplete,
+  onFinish,
+}: Props) {
   const group = GROUPS.find((g) => g.id === groupId)!
   const pool = useMemo(() => vocab.filter((v) => group.cats.includes(v.cat)), [vocab, group])
 
@@ -65,9 +73,11 @@ export default function Flashcards({ vocab, groupId, srs, onSrsChange, onFinish 
 
   function grade(correct: boolean) {
     onSrsChange(reviewCard(srs, entry.id, correct), correct)
-    if (correct) setKnown((k) => k + 1)
+    const finalKnown = known + (correct ? 1 : 0)
+    if (correct) setKnown(finalKnown)
     if (index + 1 >= session.length) {
       setFinished(true)
+      onSessionComplete(finalKnown, session.length)
       return
     }
     setIndex((i) => i + 1)
