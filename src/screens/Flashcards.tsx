@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { GROUPS } from '../data/categories'
 import { buildExampleSentence } from '../data/examples'
+import SessionComplete from './SessionComplete'
 import { pick } from '../lib/exercises'
 import { getState, isMastered, masteryLabel, reviewCard } from '../lib/srs'
 import type { SrsStore, VocabEntry } from '../types'
@@ -29,8 +30,24 @@ export default function Flashcards({ vocab, groupId, srs, onSrsChange, onFinish 
   const [index, setIndex] = useState(0)
   const [flipped, setFlipped] = useState(false)
   const [known, setKnown] = useState(0)
+  const [finished, setFinished] = useState(false)
 
   const entry = session[index]
+
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if (!flipped) return
+      if (e.key === 'ArrowRight') grade(true)
+      if (e.key === 'ArrowLeft') grade(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [flipped, index])
+
+  if (finished) {
+    return <SessionComplete correct={known} total={session.length} onContinue={onFinish} />
+  }
 
   if (!entry) {
     return (
@@ -50,7 +67,7 @@ export default function Flashcards({ vocab, groupId, srs, onSrsChange, onFinish 
     onSrsChange(reviewCard(srs, entry.id, correct))
     if (correct) setKnown((k) => k + 1)
     if (index + 1 >= session.length) {
-      onFinish()
+      setFinished(true)
       return
     }
     setIndex((i) => i + 1)
@@ -137,6 +154,9 @@ export default function Flashcards({ vocab, groupId, srs, onSrsChange, onFinish 
       <div className="mt-4 text-center text-xs text-slate-500">
         Sabidas en esta sesión: {known} / {index + (flipped ? 0 : 0)}
       </div>
+      <p className="mt-2 text-center text-[11px] text-slate-600">
+        Atajos: Espacio para voltear · ← No la sabía · → La sabía
+      </p>
     </div>
   )
 }
