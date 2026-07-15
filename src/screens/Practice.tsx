@@ -1,6 +1,8 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { GROUPS } from '../data/categories'
-import { VOCAB } from '../data/vocab'
+import { generateConjugationEntries, TENSE_LABEL, type Tense } from '../data/conjugations'
+import { buildExampleSentence } from '../data/examples'
+import SessionComplete from './SessionComplete'
 import {
   buildCompletarQuestion,
   buildConjugationQuestion,
@@ -10,14 +12,16 @@ import {
   normalize,
   pick,
 } from '../lib/exercises'
-import { getState, reviewCard } from '../lib/srs'
+import { getState, isMastered, reviewCard } from '../lib/srs'
 import type { ExerciseType, SrsStore, VocabEntry } from '../types'
 
 interface Props {
+  vocab: VocabEntry[]
   groupId: string
   exerciseType: ExerciseType
   srs: SrsStore
-  onSrsChange: (s: SrsStore) => void
+  onSrsChange: (s: SrsStore, correct: boolean) => void
+  onSessionComplete: (correct: number, total: number) => void
   onFinish: () => void
 }
 
@@ -32,14 +36,28 @@ function selectSessionEntries(
   if (exerciseType === 'genero') candidates = pool.filter(isGenderable)
   if (exerciseType === 'conjugacion') candidates = pool.filter((e) => e.cat === 'verbo_conjugado')
 
-  const due = candidates.filter((e) => getState(srs, e.id).box < 5)
+  const due = candidates.filter((e) => !isMastered(getState(srs, e.id)))
   const source = due.length >= 4 ? due : candidates
   return pick(source, Math.min(SESSION_SIZE, source.length))
 }
 
-export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFinish }: Props) {
+const EXTRA_TENSE_ENTRIES = generateConjugationEntries()
+
+export default function Practice({
+  vocab,
+  groupId,
+  exerciseType,
+  srs,
+  onSrsChange,
+  onSessionComplete,
+  onFinish,
+}: Props) {
   const group = GROUPS.find((g) => g.id === groupId)!
-  const pool = useMemo(() => VOCAB.filter((v) => group.cats.includes(v.cat)), [group])
+  const pool = useMemo(() => {
+    const base = vocab.filter((v) => group.cats.includes(v.cat))
+    if (exerciseType !== 'conjugacion' || !group.cats.includes('verbo_conjugado')) return base
+    return [...base, ...EXTRA_TENSE_ENTRIES]
+  }, [vocab, group, exerciseType])
   const [directionSeed] = useState(() => Math.random())
 
   const session = useMemo(
@@ -53,11 +71,51 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
   const [textAnswer, setTextAnswer] = useState('')
   const [checked, setChecked] = useState(false)
   const [correctCount, setCorrectCount] = useState(0)
+  const [finished, setFinished] = useState(false)
   const [shake, setShake] = useState(false)
 
   const entry = session[index]
+  const direction = (index + (directionSeed > 0.5 ? 1 : 0)) % 2 === 0 ? 'fr2es' : 'es2fr'
 
-  if (!entry) {
+  const question = useMemo(() => {
+    if (!entry) return null
+    if (exerciseType === 'opcion_multiple') return buildMultipleChoice(entry, pool, direction)
+    if (exerciseType === 'genero') return buildGenderQuestion(entry)
+    if (exerciseType === 'conjugacion') return buildConjugationQuestion(entry, pool)
+    return buildCompletarQuestion(entry)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [entry?.id, exerciseType])
+
+  const example = useMemo(() => (entry ? buildExampleSentence(entry) : null), [entry])
+
+  useEffect(() => {
+    // El input de "completar" maneja su propio Enter (comprobar/siguiente);
+    // aquí solo cubrimos los ejercicios de opciones para no disparar doble.
+    if (!question || question.kind === 'completar') return
+    function onKeyDown(e: KeyboardEvent) {
+      if (checked) {
+        if (e.key === 'Enter') next()
+        return
+      }
+      if (question!.kind === 'mc' || question!.kind === 'conj') {
+        const n = Number(e.key)
+        const opts = (question as { options: string[] }).options
+        if (n >= 1 && n <= opts.length) handleAnswer(opts[n - 1])
+      } else if (question!.kind === 'gender') {
+        if (e.key.toLowerCase() === 'm') handleAnswer('m')
+        if (e.key.toLowerCase() === 'f') handleAnswer('f')
+      }
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checked, question])
+
+  if (finished) {
+    return <SessionComplete correct={correctCount} total={session.length} onContinue={onFinish} />
+  }
+
+  if (!entry || !question) {
     return (
       <div className="max-w-xl mx-auto px-4 pt-16 text-center">
         <p className="text-slate-300">No hay suficientes palabras en esta categoría todavía.</p>
@@ -68,21 +126,12 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
     )
   }
 
-  const direction = (index + (directionSeed > 0.5 ? 1 : 0)) % 2 === 0 ? 'fr2es' : 'es2fr'
-
-  const question = useMemo(() => {
-    if (exerciseType === 'opcion_multiple') return buildMultipleChoice(entry, pool, direction)
-    if (exerciseType === 'genero') return buildGenderQuestion(entry)
-    if (exerciseType === 'conjugacion') return buildConjugationQuestion(entry, pool)
-    return buildCompletarQuestion(entry)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [entry.id, exerciseType])
-
   function isCorrect(): boolean {
-    if (question.kind === 'mc') return selected === question.answer
-    if (question.kind === 'gender') return selected === question.answer
-    if (question.kind === 'conj') return selected === question.answer
-    if (question.kind === 'completar') return normalize(textAnswer) === normalize(question.answer)
+    const q = question!
+    if (q.kind === 'mc') return selected === q.answer
+    if (q.kind === 'gender') return selected === q.answer
+    if (q.kind === 'conj') return selected === q.answer
+    if (q.kind === 'completar') return normalize(textAnswer) === normalize(q.answer)
     return false
   }
 
@@ -90,22 +139,24 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
     if (checked) return
     if (choice !== null) setSelected(choice)
     setChecked(true)
+    const q = question!
     const correct =
-      question.kind === 'completar'
-        ? normalize(textAnswer) === normalize(question.answer)
-        : choice === (question as { answer: string }).answer
+      q.kind === 'completar'
+        ? normalize(textAnswer) === normalize(q.answer)
+        : choice === (q as { answer: string }).answer
     if (correct) {
       setCorrectCount((c) => c + 1)
     } else {
       setShake(true)
       setTimeout(() => setShake(false), 400)
     }
-    onSrsChange(reviewCard(srs, entry.id, correct))
+    onSrsChange(reviewCard(srs, entry.id, correct), correct)
   }
 
   function next() {
     if (index + 1 >= session.length) {
-      onFinish()
+      setFinished(true)
+      onSessionComplete(correctCount, session.length)
       return
     }
     setIndex((i) => i + 1)
@@ -119,21 +170,31 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
   return (
     <div className="max-w-xl mx-auto px-4 pb-16 pt-6">
       <div className="flex items-center justify-between mb-4">
-        <button onClick={onFinish} className="text-slate-400 text-sm tap-scale">
+        <button onClick={onFinish} className="text-slate-400 text-sm tap-scale" aria-label="Salir de la sesión">
           ✕ Salir
         </button>
-        <div className="text-xs text-slate-400">
+        <div className="text-xs text-slate-400" aria-live="polite">
           {index + 1} / {session.length}
         </div>
       </div>
-      <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden mb-8">
+      <div
+        className="h-1.5 rounded-full bg-slate-800 overflow-hidden mb-8"
+        role="progressbar"
+        aria-valuenow={progressPct}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label="Progreso de la sesión"
+      >
         <div
           className="h-full bg-sky-500 rounded-full transition-all"
           style={{ width: `${progressPct}%` }}
         />
       </div>
 
-      <div className={`rounded-2xl bg-slate-900/60 border border-slate-800 p-6 ${shake ? 'shake' : ''}`}>
+      <div
+        key={entry.id}
+        className={`pop rounded-2xl bg-slate-900/60 border border-slate-800 p-6 ${shake ? 'shake' : ''}`}
+      >
         {question.kind === 'mc' && (
           <>
             <p className="text-xs text-slate-400 mb-2">{question.promptLabel}</p>
@@ -181,6 +242,12 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
             <p className="text-xs text-slate-400 mb-2">
               Verbo <span className="text-sky-400">{question.infinitivo}</span> — persona:{' '}
               <span className="text-sky-400">{question.persona}</span>
+              {question.tense && question.tense !== 'presente' && (
+                <>
+                  {' '}
+                  — tiempo: <span className="text-amber-400">{TENSE_LABEL[question.tense as Tense]}</span>
+                </>
+              )}
             </p>
             <h2 className="text-lg font-semibold mb-6">
               ¿Cuál es la forma correcta de "{question.infinitivo}" para "{question.persona}"?
@@ -202,9 +269,12 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
 
         {question.kind === 'completar' && (
           <>
-            <p className="text-xs text-slate-400 mb-2">Escribe en francés:</p>
+            <label htmlFor="completar-input" className="text-xs text-slate-400 mb-2 block">
+              Escribe en francés:
+            </label>
             <h2 className="text-2xl font-semibold mb-6">{question.hintEs}</h2>
             <input
+              id="completar-input"
               autoFocus
               disabled={checked}
               value={textAnswer}
@@ -216,10 +286,11 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
                 }
               }}
               placeholder="tu respuesta..."
+              aria-label="Tu respuesta en francés"
               className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-lg outline-none focus:border-sky-500"
             />
             {checked && (
-              <p className={`mt-3 text-sm ${isCorrect() ? 'text-emerald-400' : 'text-rose-400'}`}>
+              <p role="status" className={`mt-3 text-sm ${isCorrect() ? 'text-emerald-400' : 'text-rose-400'}`}>
                 {isCorrect() ? '¡Correcto!' : `Respuesta correcta: ${question.answer}`}
               </p>
             )}
@@ -227,7 +298,7 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
         )}
 
         {checked && question.kind !== 'completar' && (
-          <p className={`mt-4 text-sm ${isCorrect() ? 'text-emerald-400' : 'text-rose-400'}`}>
+          <p role="status" className={`mt-4 text-sm ${isCorrect() ? 'text-emerald-400' : 'text-rose-400'}`}>
             {isCorrect()
               ? '¡Correcto!'
               : `Respuesta correcta: ${
@@ -242,6 +313,12 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
 
         {entry.es.split(',').length > 1 && checked && (
           <p className="mt-2 text-xs text-slate-500">Otros significados: {entry.es}</p>
+        )}
+
+        {checked && example && (
+          <p className="mt-2 text-xs text-slate-500">
+            Ejemplo: <span className="italic text-slate-400">{example.fr}</span>
+          </p>
         )}
 
         <div className="mt-6 flex justify-end">
@@ -266,6 +343,11 @@ export default function Practice({ groupId, exerciseType, srs, onSrsChange, onFi
       <div className="mt-4 text-center text-xs text-slate-500">
         Aciertos en esta sesión: {correctCount} / {index + (checked ? 1 : 0)}
       </div>
+      {question.kind !== 'completar' && (
+        <p className="mt-2 text-center text-[11px] text-slate-600">
+          Atajos: {question.kind === 'gender' ? 'M / F' : `1-${question.options.length}`} para elegir · Enter para continuar
+        </p>
+      )}
     </div>
   )
 }
@@ -295,7 +377,8 @@ function OptionButton({
     <button
       disabled={checked}
       onClick={onClick}
-      className={`tap-scale text-left rounded-lg border px-4 py-3 transition-colors ${cls}`}
+      aria-pressed={selected}
+      className={`tap-scale text-left rounded-lg border px-4 py-3 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400 ${cls}`}
     >
       {label}
     </button>
