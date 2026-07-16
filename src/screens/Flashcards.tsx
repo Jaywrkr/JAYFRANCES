@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { GROUPS } from '../data/categories'
 import { buildExampleSentence } from '../data/examples'
 import SessionComplete from './SessionComplete'
+import SpeakButton from './SpeakButton'
 import { pick } from '../lib/exercises'
 import { getState, isMastered, masteryLabel, reviewCard } from '../lib/srs'
 import type { SrsStore, VocabEntry } from '../types'
@@ -13,6 +14,7 @@ interface Props {
   onSrsChange: (s: SrsStore, correct: boolean) => void
   onSessionComplete: (correct: number, total: number) => void
   onFinish: () => void
+  overrideEntries?: VocabEntry[]
 }
 
 const SESSION_SIZE = 15
@@ -24,11 +26,16 @@ export default function Flashcards({
   onSrsChange,
   onSessionComplete,
   onFinish,
+  overrideEntries,
 }: Props) {
-  const group = GROUPS.find((g) => g.id === groupId)!
-  const pool = useMemo(() => vocab.filter((v) => group.cats.includes(v.cat)), [vocab, group])
+  const pool = useMemo(() => {
+    if (overrideEntries) return overrideEntries
+    const group = GROUPS.find((g) => g.id === groupId)!
+    return vocab.filter((v) => group.cats.includes(v.cat))
+  }, [vocab, groupId, overrideEntries])
 
   const session = useMemo(() => {
+    if (overrideEntries) return pick(pool, Math.min(SESSION_SIZE, pool.length))
     const due = pool.filter((e) => !isMastered(getState(srs, e.id)))
     const source = due.length >= 5 ? due : pool
     return pick(source, Math.min(SESSION_SIZE, source.length))
@@ -129,11 +136,17 @@ export default function Flashcards({
           {masteryLabel(state.repetitions)}
         </span>
         {!flipped ? (
-          <h2 className="text-3xl font-bold">{entry.fr}</h2>
+          <div className="flex items-center gap-2">
+            <h2 className="text-3xl font-bold">{entry.fr}</h2>
+            <SpeakButton text={entry.fr} />
+          </div>
         ) : (
           <>
             <h2 className="text-2xl font-bold text-sky-400">{entry.es}</h2>
-            <p className="text-slate-500 text-sm mt-3">{entry.fr}</p>
+            <div className="flex items-center gap-2 mt-3">
+              <p className="text-slate-500 text-sm">{entry.fr}</p>
+              <SpeakButton text={entry.fr} className="w-6 h-6 text-sm" />
+            </div>
             {example && (
               <p className="text-slate-500 text-xs mt-4 italic">Ejemplo: {example.fr}</p>
             )}

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
   buildCompletarQuestion,
   buildConjugationQuestion,
+  buildDictationQuestion,
   buildGenderQuestion,
   buildMultipleChoice,
   firstGloss,
@@ -102,5 +103,13 @@ describe('completar questions', () => {
     const q = buildCompletarQuestion(pool[1])
     expect(q.hintEs).toBe('casa')
     expect(q.answer).toBe('maison')
+  })
+})
+
+describe('dictation questions', () => {
+  it('asks for the french word without revealing a hint', () => {
+    const q = buildDictationQuestion(pool[1])
+    expect(q.answer).toBe('maison')
+    expect(q).not.toHaveProperty('hintEs')
   })
 })

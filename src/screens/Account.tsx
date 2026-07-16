@@ -20,6 +20,7 @@ const EXERCISE_LABEL: Record<string, string> = {
   genero: 'Masculino o femenino',
   conjugacion: 'Conjugación',
   completar: 'Escribir la palabra',
+  dictado: 'Dictado',
 }
 
 export default function Account({ userEmail, syncStatus, onSignedIn, onSignOut, onSyncNow, onBack }: Props) {
@@ -154,7 +155,11 @@ export default function Account({ userEmail, syncStatus, onSignedIn, onSignOut, 
               >
                 <div>
                   <span className="text-slate-100">
-                    {group ? `${group.emoji} ${group.label}` : s.groupId}
+                    {group
+                      ? `${group.emoji} ${group.label}`
+                      : s.groupId === 'palabras-dificiles'
+                        ? '🎯 Palabras difíciles'
+                        : s.groupId}
                   </span>
                   <span className="text-slate-500"> · {EXERCISE_LABEL[s.exerciseType as ExerciseType] ?? s.exerciseType}</span>
                 </div>

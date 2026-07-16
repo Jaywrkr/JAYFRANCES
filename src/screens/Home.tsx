@@ -1,6 +1,7 @@
 import { GROUPS } from '../data/categories'
 import { groupMastery } from '../lib/progress'
 import { isDue } from '../lib/srs'
+import { getWeakSpots } from '../lib/weakSpots'
 import type { Theme } from '../lib/theme'
 import type { StreakData } from '../lib/streak'
 import type { SrsStore, VocabEntry } from '../types'
@@ -15,6 +16,7 @@ interface Props {
   onManageVocab: () => void
   onShowStats: () => void
   onShowAccount: () => void
+  onShowWeakSpots: () => void
 }
 
 export default function Home({
@@ -27,11 +29,13 @@ export default function Home({
   onManageVocab,
   onShowStats,
   onShowAccount,
+  onShowWeakSpots,
 }: Props) {
   const totalWords = vocab.length
   const overallEntries = vocab
   const overallMastery = groupMastery(srs, overallEntries)
   const dueCount = vocab.filter((v) => isDue(srs, v.id)).length
+  const weakSpotCount = getWeakSpots(vocab, srs, 9999).length
 
   return (
     <div className="max-w-3xl mx-auto px-4 pb-16 pt-8">
@@ -95,6 +99,22 @@ export default function Home({
           ☁️ Cuenta y sync
         </button>
       </div>
+
+      {weakSpotCount > 0 && (
+        <button
+          onClick={onShowWeakSpots}
+          className="tap-scale w-full text-left rounded-2xl bg-gradient-to-r from-rose-600/15 to-amber-500/10 border border-rose-600/30 hover:border-rose-500/60 p-4 mb-4 flex items-center gap-3"
+        >
+          <span className="text-2xl">🎯</span>
+          <div>
+            <h2 className="font-semibold text-slate-100">Palabras difíciles</h2>
+            <p className="text-xs text-slate-400 mt-0.5">
+              {weakSpotCount} {weakSpotCount === 1 ? 'palabra' : 'palabras'} donde más fallas — repásalas directo,
+              sin importar la categoría
+            </p>
+          </div>
+        </button>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {GROUPS.map((g) => {

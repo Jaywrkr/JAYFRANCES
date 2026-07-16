@@ -55,6 +55,7 @@ export type ExerciseType =
   | 'genero'
   | 'conjugacion'
   | 'completar'
+  | 'dictado'
 
 export interface SrsState {
   repetitions: number // repeticiones correctas consecutivas

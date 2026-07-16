@@ -9,10 +9,25 @@ App para repasar el vocabulario de francés (438+ palabras extraídas de tu prog
 - **Masculino o femenino** (para sustantivos, adjetivos, artículos, posesivos y nacionalidades)
 - **Conjugación** (presente, imparfait, futur simple y passé composé de être, avoir, aller, vouloir, venir, connaître, etc.)
 - **Escribir la palabra** (completar en francés a partir de la traducción)
+- **Dictado** (escuchas la pronunciación por voz y escribes lo que oíste, sin ver la palabra)
+
+## Lo que no te da Duolingo
+
+- **🔊 Pronunciación bajo demanda**: botón de escuchar en cualquier palabra (flashcards, ejercicios, tu propio vocabulario), usando la síntesis de voz del navegador — sin límites ni esperar a que la app tenga audio grabado para esa palabra.
+- **🎯 Palabras difíciles**: pantalla dedicada que calcula tu porcentaje real de aciertos por palabra y te deja repasar exactamente las que más fallas, sin importar su categoría gramatical.
+- **🎧 Dictado**: ejercicio de solo oído — pronunciación primero, palabra escrita después.
+- Explicaciones de por qué algo es difícil (concordancia de posesivos, género, etc.) en las descripciones de cada categoría, en vez de lecciones gamificadas sin contexto gramatical.
 
 ## Otras funciones
 
 - Frases de ejemplo, agregar tu propio vocabulario, estadísticas, racha diaria, logros, modo claro/oscuro, atajos de teclado, PWA instalable/offline.
+
+## Instalar en iPhone
+
+1. Abre la app en Safari (no en otro navegador — "Agregar a inicio" solo instala PWAs de forma completa desde Safari en iOS).
+2. Toca el botón de **Compartir** (el cuadrado con la flecha hacia arriba).
+3. Elige **"Agregar a la pantalla de inicio"**.
+4. Se instala con su propio ícono y abre a pantalla completa, sin la barra de Safari, respetando el notch y la barra inferior del teléfono.
 
 ## Desarrollo
 

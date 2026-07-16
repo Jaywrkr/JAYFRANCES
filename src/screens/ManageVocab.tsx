@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { addCustomWord, removeCustomWord } from '../lib/customVocab'
+import SpeakButton from './SpeakButton'
 import type { VocabCat, VocabEntry } from '../types'
 
 interface Props {
@@ -146,8 +147,9 @@ export default function ManageVocab({ customVocab, onChange, onBack }: Props) {
                 key={w.id}
                 className="flex items-center justify-between rounded-lg bg-slate-900/60 border border-slate-800 px-4 py-2"
               >
-                <div>
+                <div className="flex items-center gap-1">
                   <span className="font-medium">{w.fr}</span>
+                  <SpeakButton text={w.fr} className="w-6 h-6 text-sm" />
                   <span className="text-slate-500 text-sm"> — {w.es}</span>
                   <span className="text-xs text-slate-600 ml-2">
                     {CAT_OPTIONS.find((c) => c.value === w.cat)?.label ?? w.cat}

@@ -1,5 +1,6 @@
 import { GROUPS } from '../data/categories'
 import { isGenderable } from '../lib/exercises'
+import { isSpeechSupported } from '../lib/speech'
 import type { ExerciseType, VocabEntry } from '../types'
 
 interface Props {
@@ -35,6 +36,11 @@ const EXERCISE_INFO: Record<ExerciseType, { label: string; emoji: string; desc: 
     emoji: '✍️',
     desc: 'Ves la traducción en español y escribes la palabra en francés',
   },
+  dictado: {
+    label: 'Dictado (escucha y escribe)',
+    emoji: '🎧',
+    desc: 'Escuchas la pronunciación y escribes lo que oíste, sin ver la palabra',
+  },
 }
 
 export default function ExercisePicker({ vocab, groupId, onBack, onStart }: Props) {
@@ -47,6 +53,7 @@ export default function ExercisePicker({ vocab, groupId, onBack, onStart }: Prop
   if (genderableCount >= 4) available.push('genero')
   if (conjugableCount >= 4) available.push('conjugacion')
   available.push('completar')
+  if (isSpeechSupported()) available.push('dictado')
 
   return (
     <div className="max-w-2xl mx-auto px-4 pb-16 pt-8">

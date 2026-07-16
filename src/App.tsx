@@ -6,6 +6,7 @@ import Flashcards from './screens/Flashcards'
 import ManageVocab from './screens/ManageVocab'
 import Stats from './screens/Stats'
 import Account from './screens/Account'
+import WeakSpots from './screens/WeakSpots'
 import { loadSrs, saveSrs } from './lib/srs'
 import { loadCustomVocab } from './lib/customVocab'
 import { applyTheme, loadTheme, saveTheme, type Theme } from './lib/theme'
@@ -25,6 +26,8 @@ type View =
   | { name: 'manageVocab' }
   | { name: 'stats' }
   | { name: 'account' }
+  | { name: 'weakSpots' }
+  | { name: 'weakSpotsSession'; entries: VocabEntry[]; exercise: ExerciseType }
 
 type SyncStatus = 'idle' | 'syncing' | 'synced' | 'error'
 
@@ -123,6 +126,45 @@ export default function App() {
           onManageVocab={() => setView({ name: 'manageVocab' })}
           onShowStats={() => setView({ name: 'stats' })}
           onShowAccount={() => setView({ name: 'account' })}
+          onShowWeakSpots={() => setView({ name: 'weakSpots' })}
+        />
+      )}
+
+      {view.name === 'weakSpots' && (
+        <WeakSpots
+          vocab={vocab}
+          srs={srs}
+          onBack={() => setView({ name: 'home' })}
+          onStart={(entries, exercise) => setView({ name: 'weakSpotsSession', entries, exercise })}
+        />
+      )}
+
+      {view.name === 'weakSpotsSession' && view.exercise === 'flashcards' && (
+        <Flashcards
+          vocab={vocab}
+          groupId="palabras-dificiles"
+          overrideEntries={view.entries}
+          srs={srs}
+          onSrsChange={handleSrsChange}
+          onSessionComplete={(correct, total) =>
+            handleSessionComplete('palabras-dificiles', view.exercise, correct, total)
+          }
+          onFinish={() => setView({ name: 'weakSpots' })}
+        />
+      )}
+
+      {view.name === 'weakSpotsSession' && view.exercise !== 'flashcards' && (
+        <Practice
+          vocab={vocab}
+          groupId="palabras-dificiles"
+          overrideEntries={view.entries}
+          exerciseType={view.exercise}
+          srs={srs}
+          onSrsChange={handleSrsChange}
+          onSessionComplete={(correct, total) =>
+            handleSessionComplete('palabras-dificiles', view.exercise, correct, total)
+          }
+          onFinish={() => setView({ name: 'weakSpots' })}
         />
       )}
 

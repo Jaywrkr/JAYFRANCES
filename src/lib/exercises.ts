@@ -130,6 +130,23 @@ export function buildCompletarQuestion(entry: VocabEntry): CompletarQuestion {
   }
 }
 
+export interface DictationQuestion {
+  kind: 'dictado'
+  answer: string
+  entry: VocabEntry
+}
+
+// Ejercicio de dictado: se escucha la palabra en francés (texto a voz) y se
+// escribe lo que se oyó, sin ver la traducción de antemano. Refuerza el
+// oído, algo que Duolingo no deja practicar a demanda palabra por palabra.
+export function buildDictationQuestion(entry: VocabEntry): DictationQuestion {
+  return {
+    kind: 'dictado',
+    answer: entry.fr,
+    entry,
+  }
+}
+
 export function normalize(s: string): string {
   return s
     .toLowerCase()

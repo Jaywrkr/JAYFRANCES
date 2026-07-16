@@ -3,9 +3,12 @@ import { GROUPS } from '../data/categories'
 import { generateConjugationEntries, TENSE_LABEL, type Tense } from '../data/conjugations'
 import { buildExampleSentence } from '../data/examples'
 import SessionComplete from './SessionComplete'
+import SpeakButton from './SpeakButton'
+import { speakFrench } from '../lib/speech'
 import {
   buildCompletarQuestion,
   buildConjugationQuestion,
+  buildDictationQuestion,
   buildGenderQuestion,
   buildMultipleChoice,
   isGenderable,
@@ -23,6 +26,7 @@ interface Props {
   onSrsChange: (s: SrsStore, correct: boolean) => void
   onSessionComplete: (correct: number, total: number) => void
   onFinish: () => void
+  overrideEntries?: VocabEntry[]
 }
 
 const SESSION_SIZE = 10
@@ -51,20 +55,22 @@ export default function Practice({
   onSrsChange,
   onSessionComplete,
   onFinish,
+  overrideEntries,
 }: Props) {
-  const group = GROUPS.find((g) => g.id === groupId)!
   const pool = useMemo(() => {
+    if (overrideEntries) return overrideEntries
+    const group = GROUPS.find((g) => g.id === groupId)!
     const base = vocab.filter((v) => group.cats.includes(v.cat))
     if (exerciseType !== 'conjugacion' || !group.cats.includes('verbo_conjugado')) return base
     return [...base, ...EXTRA_TENSE_ENTRIES]
-  }, [vocab, group, exerciseType])
+  }, [vocab, groupId, exerciseType, overrideEntries])
   const [directionSeed] = useState(() => Math.random())
 
-  const session = useMemo(
-    () => selectSessionEntries(pool, srs, exerciseType),
+  const session = useMemo(() => {
+    if (overrideEntries) return pick(pool, Math.min(SESSION_SIZE, pool.length))
+    return selectSessionEntries(pool, srs, exerciseType)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [pool, exerciseType]
-  )
+  }, [pool, exerciseType])
 
   const [index, setIndex] = useState(0)
   const [selected, setSelected] = useState<string | null>(null)
@@ -82,6 +88,7 @@ export default function Practice({
     if (exerciseType === 'opcion_multiple') return buildMultipleChoice(entry, pool, direction)
     if (exerciseType === 'genero') return buildGenderQuestion(entry)
     if (exerciseType === 'conjugacion') return buildConjugationQuestion(entry, pool)
+    if (exerciseType === 'dictado') return buildDictationQuestion(entry)
     return buildCompletarQuestion(entry)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entry?.id, exerciseType])
@@ -89,9 +96,9 @@ export default function Practice({
   const example = useMemo(() => (entry ? buildExampleSentence(entry) : null), [entry])
 
   useEffect(() => {
-    // El input de "completar" maneja su propio Enter (comprobar/siguiente);
+    // El input de "completar"/"dictado" maneja su propio Enter (comprobar/siguiente);
     // aquí solo cubrimos los ejercicios de opciones para no disparar doble.
-    if (!question || question.kind === 'completar') return
+    if (!question || question.kind === 'completar' || question.kind === 'dictado') return
     function onKeyDown(e: KeyboardEvent) {
       if (checked) {
         if (e.key === 'Enter') next()
@@ -131,7 +138,7 @@ export default function Practice({
     if (q.kind === 'mc') return selected === q.answer
     if (q.kind === 'gender') return selected === q.answer
     if (q.kind === 'conj') return selected === q.answer
-    if (q.kind === 'completar') return normalize(textAnswer) === normalize(q.answer)
+    if (q.kind === 'completar' || q.kind === 'dictado') return normalize(textAnswer) === normalize(q.answer)
     return false
   }
 
@@ -141,7 +148,7 @@ export default function Practice({
     setChecked(true)
     const q = question!
     const correct =
-      q.kind === 'completar'
+      q.kind === 'completar' || q.kind === 'dictado'
         ? normalize(textAnswer) === normalize(q.answer)
         : choice === (q as { answer: string }).answer
     if (correct) {
@@ -198,7 +205,11 @@ export default function Practice({
         {question.kind === 'mc' && (
           <>
             <p className="text-xs text-slate-400 mb-2">{question.promptLabel}</p>
-            <h2 className="text-2xl font-semibold mb-6">{question.prompt}</h2>
+            <div className="flex items-center gap-2 mb-6">
+              <h2 className="text-2xl font-semibold">{question.prompt}</h2>
+              {direction === 'fr2es' && <SpeakButton text={question.prompt} />}
+              {checked && direction === 'es2fr' && <SpeakButton text={question.answer} />}
+            </div>
             <div className="grid gap-2">
               {question.options.map((opt) => (
                 <OptionButton
@@ -217,7 +228,10 @@ export default function Practice({
         {question.kind === 'gender' && (
           <>
             <p className="text-xs text-slate-400 mb-2">¿Masculino o femenino? ({question.hintEs})</p>
-            <h2 className="text-3xl font-bold mb-6 text-center">{question.word}</h2>
+            <div className="flex items-center justify-center gap-2 mb-6">
+              <h2 className="text-3xl font-bold text-center">{question.word}</h2>
+              <SpeakButton text={question.word} />
+            </div>
             <div className="grid grid-cols-2 gap-3">
               <OptionButton
                 label="🔵 Masculino (le / un)"
@@ -249,9 +263,12 @@ export default function Practice({
                 </>
               )}
             </p>
-            <h2 className="text-lg font-semibold mb-6">
-              ¿Cuál es la forma correcta de "{question.infinitivo}" para "{question.persona}"?
-            </h2>
+            <div className="flex items-center gap-2 mb-6">
+              <h2 className="text-lg font-semibold">
+                ¿Cuál es la forma correcta de "{question.infinitivo}" para "{question.persona}"?
+              </h2>
+              {checked && <SpeakButton text={question.answer} />}
+            </div>
             <div className="grid gap-2">
               {question.options.map((opt) => (
                 <OptionButton
@@ -272,7 +289,10 @@ export default function Practice({
             <label htmlFor="completar-input" className="text-xs text-slate-400 mb-2 block">
               Escribe en francés:
             </label>
-            <h2 className="text-2xl font-semibold mb-6">{question.hintEs}</h2>
+            <div className="flex items-center gap-2 mb-6">
+              <h2 className="text-2xl font-semibold">{question.hintEs}</h2>
+              {checked && <SpeakButton text={question.answer} />}
+            </div>
             <input
               id="completar-input"
               autoFocus
@@ -297,7 +317,45 @@ export default function Practice({
           </>
         )}
 
-        {checked && question.kind !== 'completar' && (
+        {question.kind === 'dictado' && (
+          <>
+            <p className="text-xs text-slate-400 mb-3">Escucha y escribe en francés:</p>
+            <div className="flex justify-center mb-6">
+              <button
+                onClick={() => speakFrench(question.answer)}
+                className="tap-scale flex items-center gap-2 rounded-full bg-sky-600/20 border border-sky-600/40 text-sky-300 px-6 py-3 text-lg font-medium"
+              >
+                🔊 Escuchar
+              </button>
+            </div>
+            <label htmlFor="dictado-input" className="sr-only">
+              Tu respuesta en francés
+            </label>
+            <input
+              id="dictado-input"
+              autoFocus
+              disabled={checked}
+              value={textAnswer}
+              onChange={(e) => setTextAnswer(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  if (!checked) handleAnswer(null)
+                  else next()
+                }
+              }}
+              placeholder="lo que escuchaste..."
+              aria-label="Tu respuesta en francés"
+              className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-lg outline-none focus:border-sky-500"
+            />
+            {checked && (
+              <p role="status" className={`mt-3 text-sm ${isCorrect() ? 'text-emerald-400' : 'text-rose-400'}`}>
+                {isCorrect() ? '¡Correcto!' : `Respuesta correcta: ${question.answer}`}
+              </p>
+            )}
+          </>
+        )}
+
+        {checked && question.kind !== 'completar' && question.kind !== 'dictado' && (
           <p role="status" className={`mt-4 text-sm ${isCorrect() ? 'text-emerald-400' : 'text-rose-400'}`}>
             {isCorrect()
               ? '¡Correcto!'
@@ -322,7 +380,7 @@ export default function Practice({
         )}
 
         <div className="mt-6 flex justify-end">
-          {!checked && question.kind === 'completar' ? (
+          {!checked && (question.kind === 'completar' || question.kind === 'dictado') ? (
             <button
               onClick={() => handleAnswer(null)}
               className="tap-scale rounded-lg bg-sky-600 hover:bg-sky-500 px-5 py-2 font-medium"
@@ -343,7 +401,7 @@ export default function Practice({
       <div className="mt-4 text-center text-xs text-slate-500">
         Aciertos en esta sesión: {correctCount} / {index + (checked ? 1 : 0)}
       </div>
-      {question.kind !== 'completar' && (
+      {question.kind !== 'completar' && question.kind !== 'dictado' && (
         <p className="mt-2 text-center text-[11px] text-slate-600">
           Atajos: {question.kind === 'gender' ? 'M / F' : `1-${question.options.length}`} para elegir · Enter para continuar
         </p>
