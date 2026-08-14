@@ -13,6 +13,7 @@ import { loadStreak, recordActivityToday, type StreakData } from './lib/streak'
 import { recordReview } from './lib/activityLog'
 import { recordSession } from './lib/sessionHistory'
 import { maybeShowReminder } from './lib/notifications'
+import { useOnlineStatus } from './lib/online'
 import { supabase } from './lib/supabase'
 import { mergeCustomVocab, mergeSrs, pullProgress, pushProgress } from './lib/sync'
 import { VOCAB } from './data/vocab'
@@ -37,6 +38,7 @@ export default function App() {
   const [userId, setUserId] = useState<string | null>(null)
   const [userEmail, setUserEmail] = useState<string | null>(null)
   const [syncStatus, setSyncStatus] = useState<SyncStatus>('idle')
+  const isOnline = useOnlineStatus()
 
   useEffect(() => {
     const localSrs = loadSrs()
@@ -112,6 +114,12 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
+      {!isOnline && (
+        <div className="sticky top-0 z-50 bg-amber-500 text-slate-950 text-xs font-medium text-center py-1.5 px-4">
+          Sin conexión — tu progreso se guarda en el dispositivo y se sincroniza cuando vuelvas a tener internet
+        </div>
+      )}
+
       {view.name === 'home' && (
         <Home
           vocab={vocab}
