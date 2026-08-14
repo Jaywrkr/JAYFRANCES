@@ -2938,5 +2938,165 @@
     "fr": "ça fait",
     "es": "son, hace",
     "cat": "expresion"
+  },
+  {
+    "fr": "ce",
+    "es": "este, ese",
+    "cat": "articulo",
+    "gender": "m",
+    "art_type": "demostrativo"
+  },
+  {
+    "fr": "cet",
+    "es": "este, ese",
+    "cat": "articulo",
+    "gender": "elidido",
+    "art_type": "demostrativo"
+  },
+  {
+    "fr": "cette",
+    "es": "esa, esta",
+    "cat": "articulo",
+    "gender": "f",
+    "art_type": "demostrativo"
+  },
+  {
+    "fr": "ces",
+    "es": "estos, estas, esos, esas",
+    "cat": "articulo",
+    "gender": "pl",
+    "art_type": "demostrativo"
+  },
+  {
+    "fr": "porter",
+    "es": "portar, cargar, [ropa] llevar, llevar",
+    "cat": "verbo_infinitivo"
+  },
+  {
+    "fr": "essayer",
+    "es": "intentar, probar",
+    "cat": "verbo_infinitivo"
+  },
+  {
+    "fr": "t-shirt",
+    "es": "camiseta",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "pantalon",
+    "es": "pantalón",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "chaussure",
+    "es": "zapato",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "veste",
+    "es": "chaqueta",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "vêtement",
+    "es": "ropa",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "jupe",
+    "es": "falda",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "auteur",
+    "es": "autor",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "roman",
+    "es": "novela",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "choix",
+    "es": "elección",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "musique",
+    "es": "música",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "groupe",
+    "es": "grupo",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "album",
+    "es": "álbum",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "long",
+    "es": "largo",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "longue",
+    "es": "larga",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "vieux",
+    "es": "viejo",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "vieille",
+    "es": "vieja, viejita",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "moche",
+    "es": "feo",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "gris",
+    "es": "gris",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "bizarre",
+    "es": "raro",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "bof",
+    "es": "bah",
+    "cat": "interjeccion"
+  },
+  {
+    "fr": "autres",
+    "es": "otras, otros, demás",
+    "cat": "indefinido"
+  },
+  {
+    "fr": "voudrait",
+    "es": "querría",
+    "cat": "expresion"
   }
 ]
