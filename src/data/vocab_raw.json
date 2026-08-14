@@ -3303,5 +3303,203 @@
     "fr": "tout le monde",
     "es": "todo el mundo",
     "cat": "expresion"
+  },
+  {
+    "fr": "on",
+    "es": "en",
+    "cat": "pronombre_sujeto"
+  },
+  {
+    "fr": "apprend",
+    "es": "informa, enseña, aprende",
+    "cat": "verbo_conjugado",
+    "infinitivo": "apprendre",
+    "persona": "él/ella"
+  },
+  {
+    "fr": "comprend",
+    "es": "entiende, incluye",
+    "cat": "verbo_conjugado",
+    "infinitivo": "comprendre",
+    "persona": "él/ella"
+  },
+  {
+    "fr": "sort",
+    "es": "saca, sale, hechizo, conjuro",
+    "cat": "verbo_conjugado",
+    "infinitivo": "sortir",
+    "persona": "él/ella"
+  },
+  {
+    "fr": "sortez",
+    "es": "saca, salen, sacan, sale, salga",
+    "cat": "verbo_conjugado",
+    "infinitivo": "sortir",
+    "persona": "usted/ustedes"
+  },
+  {
+    "fr": "aimer",
+    "es": "gustar, amar",
+    "cat": "verbo_infinitivo"
+  },
+  {
+    "fr": "acheter",
+    "es": "comprar",
+    "cat": "verbo_infinitivo"
+  },
+  {
+    "fr": "préférer",
+    "es": "preferir",
+    "cat": "verbo_infinitivo"
+  },
+  {
+    "fr": "jouer",
+    "es": "jugar",
+    "cat": "verbo_infinitivo"
+  },
+  {
+    "fr": "détester",
+    "es": "odiar",
+    "cat": "verbo_infinitivo"
+  },
+  {
+    "fr": "rugby",
+    "es": "rugby",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "match",
+    "es": "partido",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "prof",
+    "es": "profe",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "stade",
+    "es": "estadio",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "foot",
+    "es": "fútbol",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "sport",
+    "es": "deporte",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "joueur",
+    "es": "jugador",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "joueuse",
+    "es": "jugadora, juguetona",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "bière",
+    "es": "cerveza",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "équipe",
+    "es": "equipo",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "week-end",
+    "es": "fin de semana",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "ballon",
+    "es": "balón",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "télé",
+    "es": "televisión",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "soir",
+    "es": "noche",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "série",
+    "es": "serie (de televisión), serie, racha",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "sympa",
+    "es": "simpático, simpática",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "populaire",
+    "es": "popular",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "chère",
+    "es": "cara, querida",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "cher",
+    "es": "caro",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "sportive",
+    "es": "deportiva, deportista",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "nulle",
+    "es": "nula",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "nul",
+    "es": "pésimo",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "à la télé",
+    "es": "en la tele",
+    "cat": "preposicion_frase"
+  },
+  {
+    "fr": "tous les",
+    "es": "todo el, toda la, todas las, todos los",
+    "cat": "indefinido"
+  },
+  {
+    "fr": "et moi",
+    "es": "y yo",
+    "cat": "expresion"
   }
 ]
