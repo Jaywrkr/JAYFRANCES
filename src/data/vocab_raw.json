@@ -3501,5 +3501,94 @@
     "fr": "et moi",
     "es": "y yo",
     "cat": "expresion"
+  },
+  {
+    "fr": "comprends",
+    "es": "entiendo, capté, entendiendo",
+    "cat": "verbo_conjugado",
+    "infinitivo": "comprendre",
+    "persona": "yo/tú"
+  },
+  {
+    "fr": "apprends",
+    "es": "aprendes, aprendo",
+    "cat": "verbo_conjugado",
+    "infinitivo": "apprendre",
+    "persona": "yo/tú"
+  },
+  {
+    "fr": "cahier",
+    "es": "cuaderno",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "leçon",
+    "es": "lección",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "cours",
+    "es": "curso",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "maths",
+    "es": "matemáticas",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "géographie",
+    "es": "geografía",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "difficile",
+    "es": "difícil",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "huit",
+    "es": "ocho",
+    "cat": "numero"
+  },
+  {
+    "fr": "sept",
+    "es": "siete",
+    "cat": "numero"
+  },
+  {
+    "fr": "neuf",
+    "es": "nueve",
+    "cat": "numero"
+  },
+  {
+    "fr": "tout",
+    "es": "todo",
+    "cat": "indefinido"
+  },
+  {
+    "fr": "ne",
+    "es": "no, ne",
+    "cat": "adverbio"
+  },
+  {
+    "fr": "n'",
+    "es": "no",
+    "cat": "adverbio"
+  },
+  {
+    "fr": "à quelle heure",
+    "es": "¿a qué hora?",
+    "cat": "interrogativo"
+  },
+  {
+    "fr": "à la maison",
+    "es": "en (la) casa",
+    "cat": "preposicion_frase"
   }
 ]
