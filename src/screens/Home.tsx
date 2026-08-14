@@ -15,6 +15,7 @@ interface Props {
   onManageVocab: () => void
   onShowStats: () => void
   onShowAccount: () => void
+  onStartDuel: () => void
 }
 
 export default function Home({
@@ -27,6 +28,7 @@ export default function Home({
   onManageVocab,
   onShowStats,
   onShowAccount,
+  onStartDuel,
 }: Props) {
   const totalWords = vocab.length
   const overallEntries = vocab
@@ -74,6 +76,17 @@ export default function Home({
           </div>
         </div>
       </header>
+
+      <button
+        onClick={onStartDuel}
+        className="tap-scale w-full mb-4 rounded-2xl bg-gradient-to-r from-sky-600 to-amber-500 p-4 text-left flex items-center gap-4 shadow-lg shadow-sky-900/20"
+      >
+        <span className="text-3xl">🎮</span>
+        <div>
+          <div className="font-bold text-white">Duelo de Copilotos</div>
+          <div className="text-xs text-white/85">Juega en pareja, por turnos — ideal para dos en un viaje</div>
+        </div>
+      </button>
 
       <div className="flex justify-center gap-2 mb-4 flex-wrap">
         <button

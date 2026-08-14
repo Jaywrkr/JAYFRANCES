@@ -6,6 +6,7 @@ import Flashcards from './screens/Flashcards'
 import ManageVocab from './screens/ManageVocab'
 import Stats from './screens/Stats'
 import Account from './screens/Account'
+import Duel from './screens/Duel'
 import { loadSrs, saveSrs } from './lib/srs'
 import { loadCustomVocab } from './lib/customVocab'
 import { applyTheme, loadTheme, saveTheme, type Theme } from './lib/theme'
@@ -26,6 +27,7 @@ type View =
   | { name: 'manageVocab' }
   | { name: 'stats' }
   | { name: 'account' }
+  | { name: 'duel' }
 
 type SyncStatus = 'idle' | 'syncing' | 'synced' | 'error'
 
@@ -131,8 +133,11 @@ export default function App() {
           onManageVocab={() => setView({ name: 'manageVocab' })}
           onShowStats={() => setView({ name: 'stats' })}
           onShowAccount={() => setView({ name: 'account' })}
+          onStartDuel={() => setView({ name: 'duel' })}
         />
       )}
+
+      {view.name === 'duel' && <Duel vocab={vocab} onBack={() => setView({ name: 'home' })} />}
 
       {view.name === 'manageVocab' && (
         <ManageVocab
