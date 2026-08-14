@@ -3098,5 +3098,210 @@
     "fr": "voudrait",
     "es": "querría",
     "cat": "expresion"
+  },
+  {
+    "fr": "sors",
+    "es": "salgo, sales, sacas, saques, sáca",
+    "cat": "verbo_conjugado",
+    "infinitivo": "sortir",
+    "persona": "yo/tú"
+  },
+  {
+    "fr": "as",
+    "es": "tienes, has, cantaste",
+    "cat": "verbo_conjugado",
+    "infinitivo": "avoir",
+    "persona": "tú"
+  },
+  {
+    "fr": "peux",
+    "es": "puedo, puedes",
+    "cat": "verbo_conjugado",
+    "infinitivo": "pouvoir",
+    "persona": "yo/tú"
+  },
+  {
+    "fr": "vend",
+    "es": "vende, vendiendo",
+    "cat": "verbo_conjugado",
+    "infinitivo": "vendre",
+    "persona": "él/ella"
+  },
+  {
+    "fr": "vendez",
+    "es": "(usted) vende, (ustedes) venden, vendan",
+    "cat": "verbo_conjugado",
+    "infinitivo": "vendre",
+    "persona": "usted/ustedes"
+  },
+  {
+    "fr": "attends",
+    "es": "esperas, espere, espero, esperando",
+    "cat": "verbo_conjugado",
+    "infinitivo": "attendre",
+    "persona": "yo/tú"
+  },
+  {
+    "fr": "durer",
+    "es": "durar",
+    "cat": "verbo_infinitivo"
+  },
+  {
+    "fr": "film",
+    "es": "película",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "cinéma",
+    "es": "cine",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "concert",
+    "es": "concierto",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "yoga",
+    "es": "yoga",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "matin",
+    "es": "mañana",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "vol",
+    "es": "vuelo",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "climatisation",
+    "es": "aire acondicionado",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "dommage",
+    "es": "daño, lástima",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "steward",
+    "es": "auxiliar de vuelo",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "soif",
+    "es": "sed",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "bouteille",
+    "es": "botella",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "hôtesse",
+    "es": "azafata",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "couverture",
+    "es": "manta",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "faim",
+    "es": "hambre",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "bonbon",
+    "es": "dulce",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "pilote",
+    "es": "piloto",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "sommeil",
+    "es": "sueño",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "tablette",
+    "es": "tableta",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "sportif",
+    "es": "deportivo",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "occupé",
+    "es": "ocupado",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "pétillant",
+    "es": "con gas",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "court",
+    "es": "corto",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "sans",
+    "es": "sin",
+    "cat": "preposicion"
+  },
+  {
+    "fr": "bientôt",
+    "es": "pronto",
+    "cat": "adverbio"
+  },
+  {
+    "fr": "oh là là",
+    "es": "¡vaya!",
+    "cat": "interjeccion"
+  },
+  {
+    "fr": "chut",
+    "es": "chitón, ¡chist!, chist, shhh, shh",
+    "cat": "interjeccion"
+  },
+  {
+    "fr": "besoin de",
+    "es": "necesitas, necesita, necesito",
+    "cat": "expresion"
+  },
+  {
+    "fr": "tout le monde",
+    "es": "todo el mundo",
+    "cat": "expresion"
   }
 ]
