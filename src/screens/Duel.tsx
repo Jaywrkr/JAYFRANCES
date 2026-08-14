@@ -3,11 +3,13 @@ import { GROUPS } from '../data/categories'
 import {
   applyCoopResult,
   buildDuelQuestions,
+  drawSurpriseCard,
   duelWinner,
   DUEL_MIN_POOL,
   DUEL_ROUNDS,
   DUEL_START_LIVES,
   type DuelMode,
+  type SurpriseCard,
 } from '../lib/duel'
 import type { VocabEntry } from '../types'
 
@@ -18,8 +20,8 @@ interface Props {
 
 const CONFETTI = ['🎉', '✨', '🎊', '⭐️', '💫']
 const PLAYER_STYLE = [
-  { color: 'sky', defaultName: 'Piloto ✈️', ring: 'border-sky-500 bg-sky-500/10 text-sky-300' },
-  { color: 'amber', defaultName: 'Copiloto 🧑‍🚀', ring: 'border-amber-500 bg-amber-500/10 text-amber-300' },
+  { color: 'sky', defaultName: 'Tú ✈️', ring: 'border-sky-500 bg-sky-500/10 text-sky-300' },
+  { color: 'amber', defaultName: 'Luca 🧑‍🚀', ring: 'border-amber-500 bg-amber-500/10 text-amber-300' },
 ] as const
 
 export default function Duel({ vocab, onBack }: Props) {
@@ -43,7 +45,9 @@ export default function Duel({ vocab, onBack }: Props) {
         </button>
         <header className="mb-6 text-center">
           <div className="text-4xl mb-2">🎮✈️</div>
-          <h1 className="text-2xl font-bold">Duelo de Copilotos</h1>
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-sky-400 to-amber-400 bg-clip-text text-transparent">
+            Duelo de Copilotos
+          </h1>
           <p className="text-slate-400 text-sm mt-1">
             Un juego para dos — se van pasando el teléfono por turnos
           </p>
@@ -88,7 +92,8 @@ export default function Duel({ vocab, onBack }: Props) {
             >
               <div className="font-semibold">🤝 Cooperativo</div>
               <p className="text-xs text-slate-400 mt-1">
-                Comparten {DUEL_START_LIVES} vidas — ¡completen la misión juntos antes de perderlas!
+                Comparten {DUEL_START_LIVES} vidas y en cada turno eligen entre un 🎯 Reto o una 🎲 Carta
+                sorpresa — nunca sabes qué sigue
               </p>
             </button>
           </div>
@@ -158,8 +163,12 @@ function DuelGame({
   const [checked, setChecked] = useState(false)
   const [scores, setScores] = useState<[number, number]>([0, 0])
   const [coopScore, setCoopScore] = useState(0)
+  const [coopStreak, setCoopStreak] = useState(0)
   const [lives, setLives] = useState(DUEL_START_LIVES)
   const [ended, setEnded] = useState(false)
+  const [cardChoice, setCardChoice] = useState<'reto' | 'sorpresa' | null>(null)
+  const [surprise, setSurprise] = useState<SurpriseCard | null>(null)
+  const [doubleNext, setDoubleNext] = useState(false)
 
   const question = questions[index]
   const player = PLAYER_STYLE[question?.playerIndex ?? 0]
@@ -173,9 +182,24 @@ function DuelGame({
     if (mode === 'competitivo') {
       if (correct) setScores((s) => (question.playerIndex === 0 ? [s[0] + 1, s[1]] : [s[0], s[1] + 1]))
     } else {
-      if (correct) setCoopScore((c) => c + 1)
+      if (correct) {
+        setCoopScore((c) => c + (doubleNext ? 2 : 1))
+        setCoopStreak((s) => s + 1)
+      } else {
+        setCoopStreak(0)
+      }
+      if (doubleNext) setDoubleNext(false)
       setLives((l) => applyCoopResult(l, correct))
     }
+  }
+
+  function handleSurprise() {
+    const card = drawSurpriseCard()
+    setSurprise(card)
+    setCardChoice('sorpresa')
+    if (card.effect === 'vida_extra') setLives((l) => Math.min(DUEL_START_LIVES, l + 1))
+    if (card.effect === 'punto_extra') setCoopScore((c) => c + 1)
+    if (card.effect === 'doble_punto') setDoubleNext(true)
   }
 
   function next() {
@@ -188,6 +212,8 @@ function DuelGame({
     setSelected(null)
     setChecked(false)
     setRevealed(false)
+    setCardChoice(null)
+    setSurprise(null)
   }
 
   if (questions.length === 0) {
@@ -279,6 +305,54 @@ function DuelGame({
     )
   }
 
+  if (mode === 'cooperativo' && !cardChoice) {
+    return (
+      <div className="max-w-xl mx-auto px-4 pt-16 text-center">
+        <button onClick={onExit} className="text-slate-400 text-sm tap-scale mb-8" aria-label="Salir del duelo">
+          ✕ Salir
+        </button>
+        <p className="text-xs text-slate-400 mb-1">Turno de {names[question.playerIndex]}</p>
+        <h1 className="text-xl font-bold mb-8">Elige una carta</h1>
+        <div className="grid grid-cols-2 gap-4">
+          <button
+            onClick={() => setCardChoice('reto')}
+            className="tap-scale rounded-2xl border-2 border-sky-500 bg-sky-500/10 p-6"
+          >
+            <div className="text-4xl mb-2">🎯</div>
+            <div className="font-semibold">Reto</div>
+            <div className="text-xs text-slate-400 mt-1">Responde y suma un punto</div>
+          </button>
+          <button
+            onClick={handleSurprise}
+            className="tap-scale rounded-2xl border-2 border-fuchsia-500 bg-fuchsia-500/10 p-6"
+          >
+            <div className="text-4xl mb-2">🎲</div>
+            <div className="font-semibold">Sorpresa</div>
+            <div className="text-xs text-slate-400 mt-1">¿Qué les tocará?</div>
+          </button>
+        </div>
+        {doubleNext && <p className="mt-6 text-xs text-amber-400">✨ El próximo Reto vale doble</p>}
+        {coopStreak >= 2 && <p className="mt-2 text-xs text-orange-400">🔥 Racha de {coopStreak}</p>}
+      </div>
+    )
+  }
+
+  if (mode === 'cooperativo' && cardChoice === 'sorpresa' && surprise) {
+    return (
+      <div className="max-w-xl mx-auto px-4 pt-16 text-center">
+        <div className="text-6xl mb-4">{surprise.emoji}</div>
+        <h1 className="text-2xl font-bold mb-2">{surprise.title}</h1>
+        <p className="text-slate-300 mb-8">{surprise.desc}</p>
+        <button
+          onClick={next}
+          className="tap-scale rounded-lg bg-fuchsia-600 hover:bg-fuchsia-500 px-8 py-3 font-medium"
+        >
+          {index + 1 >= questions.length ? 'Terminar' : 'Siguiente turno →'}
+        </button>
+      </div>
+    )
+  }
+
   return (
     <div className="max-w-xl mx-auto px-4 pb-16 pt-6">
       <div className="flex items-center justify-between mb-4">
@@ -302,14 +376,18 @@ function DuelGame({
           </>
         ) : (
           <>
-            <span className="font-medium text-emerald-400">Equipo: {coopScore} aciertos</span>
+            <span className="font-medium text-emerald-400">
+              Equipo: {coopScore} aciertos {coopStreak >= 2 && <span className="text-orange-400">🔥{coopStreak}</span>}
+            </span>
             <span aria-label={`${lives} vidas restantes`}>{'❤️'.repeat(lives)}{'🖤'.repeat(DUEL_START_LIVES - lives)}</span>
           </>
         )}
       </div>
 
       <div className={`pop rounded-2xl border-2 p-6 ${player.ring}`}>
-        <p className="text-xs mb-1 font-medium">Turno de {names[question.playerIndex]}</p>
+        <p className="text-xs mb-1 font-medium">
+          Turno de {names[question.playerIndex]} {doubleNext && <span className="text-amber-400">· ✨ vale doble</span>}
+        </p>
         <p className="text-xs text-slate-400 mb-2">{question.promptLabel}</p>
         <h2 className="text-2xl font-semibold mb-6">{question.prompt}</h2>
         <div className="grid gap-2">
