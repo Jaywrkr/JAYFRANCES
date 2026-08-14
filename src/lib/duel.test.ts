@@ -1,5 +1,14 @@
 import { describe, expect, it } from 'vitest'
-import { applyCoopResult, buildDuelQuestions, drawSurpriseCard, duelWinner, SURPRISE_CARDS } from './duel'
+import {
+  applyCoopResult,
+  buildDuelQuestions,
+  drawSurpriseCard,
+  duelWinner,
+  FLIGHT_STORIES,
+  pickFlightStory,
+  storyMilestones,
+  SURPRISE_CARDS,
+} from './duel'
 import type { VocabEntry } from '../types'
 
 function makePool(n: number): VocabEntry[] {
@@ -60,5 +69,31 @@ describe('drawSurpriseCard', () => {
     for (let i = 0; i < 20; i++) {
       expect(SURPRISE_CARDS).toContainEqual(drawSurpriseCard())
     }
+  })
+})
+
+describe('pickFlightStory', () => {
+  it('always returns a story from the pool', () => {
+    for (let i = 0; i < 20; i++) {
+      expect(FLIGHT_STORIES).toContainEqual(pickFlightStory())
+    }
+  })
+})
+
+describe('storyMilestones', () => {
+  it('always starts at round 0', () => {
+    expect(storyMilestones(10)[0]).toBe(0)
+    expect(storyMilestones(4)[0]).toBe(0)
+  })
+
+  it('returns increasing, unique milestones within range', () => {
+    const milestones = storyMilestones(10)
+    expect(new Set(milestones).size).toBe(milestones.length)
+    milestones.forEach((m) => expect(m).toBeLessThan(10))
+  })
+
+  it('collapses to a single milestone for very short games', () => {
+    expect(storyMilestones(2)).toEqual([0])
+    expect(storyMilestones(1)).toEqual([0])
   })
 })

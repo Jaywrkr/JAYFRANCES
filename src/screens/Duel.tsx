@@ -8,7 +8,11 @@ import {
   DUEL_MIN_POOL,
   DUEL_ROUNDS,
   DUEL_START_LIVES,
+  FLIGHT_STORIES,
+  pickFlightStory,
+  storyMilestones,
   type DuelMode,
+  type FlightStory,
   type SurpriseCard,
 } from '../lib/duel'
 import type { VocabEntry } from '../types'
@@ -28,6 +32,7 @@ export default function Duel({ vocab, onBack }: Props) {
   const [groupId, setGroupId] = useState<string | null>(null)
   const [mode, setMode] = useState<DuelMode>('competitivo')
   const [names, setNames] = useState<[string, string]>([PLAYER_STYLE[0].defaultName, PLAYER_STYLE[1].defaultName])
+  const [storyId, setStoryId] = useState<string>(() => pickFlightStory().id)
 
   const groupsWithEnoughWords = useMemo(
     () =>
@@ -36,6 +41,7 @@ export default function Duel({ vocab, onBack }: Props) {
       ),
     [vocab]
   )
+  const story = useMemo(() => FLIGHT_STORIES.find((s) => s.id === storyId) ?? FLIGHT_STORIES[0], [storyId])
 
   if (!groupId) {
     return (
@@ -99,6 +105,26 @@ export default function Duel({ vocab, onBack }: Props) {
           </div>
         </div>
 
+        {mode === 'cooperativo' && (
+          <div className="mb-6">
+            <p className="text-xs text-slate-400 mb-2 uppercase tracking-wide">¿A dónde vuelan hoy?</p>
+            <div className="grid grid-cols-2 gap-2">
+              {FLIGHT_STORIES.map((s) => (
+                <button
+                  key={s.id}
+                  onClick={() => setStoryId(s.id)}
+                  className={`tap-scale text-left rounded-xl border p-3 ${
+                    storyId === s.id ? 'border-emerald-500 bg-emerald-500/10' : 'border-slate-800 bg-slate-900/60'
+                  }`}
+                >
+                  <div className="text-xl">{s.emoji}</div>
+                  <div className="text-sm font-medium">{s.destination}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div>
           <p className="text-xs text-slate-400 mb-2 uppercase tracking-wide">Categoría</p>
           {groupsWithEnoughWords.length === 0 ? (
@@ -132,6 +158,7 @@ export default function Duel({ vocab, onBack }: Props) {
       groupId={groupId}
       mode={mode}
       names={names}
+      story={story}
       onBack={() => setGroupId(null)}
       onExit={onBack}
     />
@@ -143,6 +170,7 @@ function DuelGame({
   groupId,
   mode,
   names,
+  story,
   onBack,
   onExit,
 }: {
@@ -150,12 +178,14 @@ function DuelGame({
   groupId: string
   mode: DuelMode
   names: [string, string]
+  story: FlightStory
   onBack: () => void
   onExit: () => void
 }) {
   const group = GROUPS.find((g) => g.id === groupId)!
   const pool = useMemo(() => vocab.filter((v) => group.cats.includes(v.cat)), [vocab, group])
   const [questions] = useState(() => buildDuelQuestions(pool, DUEL_ROUNDS))
+  const milestones = useMemo(() => storyMilestones(questions.length), [questions.length])
 
   const [index, setIndex] = useState(0)
   const [revealed, setRevealed] = useState(false)
@@ -169,6 +199,8 @@ function DuelGame({
   const [cardChoice, setCardChoice] = useState<'reto' | 'sorpresa' | null>(null)
   const [surprise, setSurprise] = useState<SurpriseCard | null>(null)
   const [doubleNext, setDoubleNext] = useState(false)
+  const [storyBeatIndex, setStoryBeatIndex] = useState<number | null>(mode === 'cooperativo' ? 0 : null)
+  const [nextBeatPointer, setNextBeatPointer] = useState(1)
 
   const question = questions[index]
   const player = PLAYER_STYLE[question?.playerIndex ?? 0]
@@ -208,12 +240,21 @@ function DuelGame({
       setEnded(true)
       return
     }
-    setIndex((i) => i + 1)
+    const newIndex = index + 1
+    setIndex(newIndex)
     setSelected(null)
     setChecked(false)
     setRevealed(false)
     setCardChoice(null)
     setSurprise(null)
+    if (mode === 'cooperativo' && nextBeatPointer < milestones.length && milestones[nextBeatPointer] === newIndex) {
+      setStoryBeatIndex(nextBeatPointer)
+      setNextBeatPointer((p) => p + 1)
+    }
+  }
+
+  function dismissStoryBeat() {
+    setStoryBeatIndex(null)
   }
 
   if (questions.length === 0) {
@@ -222,6 +263,22 @@ function DuelGame({
         <p className="text-slate-300">No hay suficientes palabras en esta categoría todavía.</p>
         <button onClick={onBack} className="mt-4 text-sky-400 tap-scale">
           ← Elegir otra categoría
+        </button>
+      </div>
+    )
+  }
+
+  if (mode === 'cooperativo' && storyBeatIndex !== null) {
+    return (
+      <div className="max-w-xl mx-auto px-4 pt-16 text-center">
+        <div className="text-6xl mb-4">{story.emoji}</div>
+        <p className="text-xs text-slate-400 mb-2 uppercase tracking-wide">Vuelo a {story.destination}</p>
+        <h1 className="text-xl font-semibold mb-8">{story.beats[storyBeatIndex]}</h1>
+        <button
+          onClick={dismissStoryBeat}
+          className="tap-scale rounded-lg bg-sky-600 hover:bg-sky-500 px-8 py-3 font-medium"
+        >
+          {storyBeatIndex === 0 ? 'Comenzar viaje →' : 'Seguir viaje →'}
         </button>
       </div>
     )
@@ -247,8 +304,8 @@ function DuelGame({
             ))}
           </div>
         )}
-        <div className="text-5xl mb-4">{celebrate ? '🏆' : '💥'}</div>
-        <h1 className="text-2xl font-bold mb-4">
+        <div className="text-5xl mb-4">{mode === 'cooperativo' ? story.emoji : celebrate ? '🏆' : '💥'}</div>
+        <h1 className="text-2xl font-bold mb-2">
           {mode === 'competitivo'
             ? winner === 'tie'
               ? '¡Empate!'
@@ -257,6 +314,10 @@ function DuelGame({
               ? '¡Misión cumplida en equipo!'
               : '¡Se acabaron las vidas!'}
         </h1>
+
+        {mode === 'cooperativo' && (
+          <p className="text-slate-400 text-sm mb-6">{coopSuccess ? story.landing : story.emergency}</p>
+        )}
 
         {mode === 'competitivo' ? (
           <div className="flex justify-center gap-6 mb-8">

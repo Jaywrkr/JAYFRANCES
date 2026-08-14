@@ -51,3 +51,73 @@ export const SURPRISE_CARDS: SurpriseCard[] = [
 export function drawSurpriseCard(): SurpriseCard {
   return SURPRISE_CARDS[Math.floor(Math.random() * SURPRISE_CARDS.length)]
 }
+
+export interface FlightStory {
+  id: string
+  emoji: string
+  destination: string
+  beats: [string, string, string]
+  landing: string
+  emergency: string
+}
+
+export const FLIGHT_STORIES: FlightStory[] = [
+  {
+    id: 'paris',
+    emoji: '🗼',
+    destination: 'París',
+    beats: [
+      '✈️ Despegan rumbo a París. ¡Abróchense los cinturones!',
+      '☁️ Sobrevuelan el océano — todavía falta un buen tramo.',
+      '🌆 A lo lejos ya se ven las luces de la ciudad.',
+    ],
+    landing: '🎉 ¡Aterrizaron en París! Misión cumplida.',
+    emergency: '😅 Tuvieron que aterrizar de emergencia antes de llegar a París.',
+  },
+  {
+    id: 'tokio',
+    emoji: '🗾',
+    destination: 'Tokio',
+    beats: [
+      '✈️ Despegan rumbo a Tokio. ¡A volar!',
+      '🌊 Cruzando el océano Pacífico, todo tranquilo por ahora.',
+      '🏯 Ya se distinguen las montañas junto a la ciudad.',
+    ],
+    landing: '🎉 ¡Aterrizaron en Tokio! Misión cumplida.',
+    emergency: '😅 Tuvieron que aterrizar de emergencia antes de llegar a Tokio.',
+  },
+  {
+    id: 'nueva-york',
+    emoji: '🗽',
+    destination: 'Nueva York',
+    beats: [
+      '✈️ Despegan rumbo a Nueva York.',
+      '☁️ Volando sobre las nubes, todo en calma.',
+      '🌃 Ya se ve el perfil de los rascacielos.',
+    ],
+    landing: '🎉 ¡Aterrizaron en Nueva York! Misión cumplida.',
+    emergency: '😅 Tuvieron que aterrizar de emergencia antes de llegar a Nueva York.',
+  },
+  {
+    id: 'rio',
+    emoji: '🏖️',
+    destination: 'Río de Janeiro',
+    beats: [
+      '✈️ Despegan rumbo a Río de Janeiro.',
+      '🌊 Sobrevuelan el mar rumbo a Sudamérica.',
+      '⛰️ Ya se asoma el Pan de Azúcar en el horizonte.',
+    ],
+    landing: '🎉 ¡Aterrizaron en Río! Misión cumplida.',
+    emergency: '😅 Tuvieron que aterrizar de emergencia antes de llegar a Río.',
+  },
+]
+
+export function pickFlightStory(): FlightStory {
+  return FLIGHT_STORIES[Math.floor(Math.random() * FLIGHT_STORIES.length)]
+}
+
+export function storyMilestones(totalRounds: number): number[] {
+  if (totalRounds <= 2) return [0]
+  const raw = [0, Math.floor(totalRounds / 3), Math.floor((2 * totalRounds) / 3)]
+  return Array.from(new Set(raw))
+}
