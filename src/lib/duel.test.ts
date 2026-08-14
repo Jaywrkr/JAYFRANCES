@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { applyCoopResult, buildDuelQuestions, duelWinner } from './duel'
+import { applyCoopResult, buildDuelQuestions, drawSurpriseCard, duelWinner, SURPRISE_CARDS } from './duel'
 import type { VocabEntry } from '../types'
 
 function makePool(n: number): VocabEntry[] {
@@ -52,5 +52,13 @@ describe('duelWinner', () => {
 
   it('reports a tie on equal scores', () => {
     expect(duelWinner([4, 4])).toBe('tie')
+  })
+})
+
+describe('drawSurpriseCard', () => {
+  it('always returns a card from the pool', () => {
+    for (let i = 0; i < 20; i++) {
+      expect(SURPRISE_CARDS).toContainEqual(drawSurpriseCard())
+    }
   })
 })
