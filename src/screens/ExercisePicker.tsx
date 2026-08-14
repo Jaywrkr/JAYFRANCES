@@ -1,9 +1,9 @@
 import { GROUPS } from '../data/categories'
-import { VOCAB } from '../data/vocab'
 import { isGenderable } from '../lib/exercises'
-import type { ExerciseType } from '../types'
+import type { ExerciseType, VocabEntry } from '../types'
 
 interface Props {
+  vocab: VocabEntry[]
   groupId: string
   onBack: () => void
   onStart: (exerciseType: ExerciseType) => void
@@ -37,9 +37,9 @@ const EXERCISE_INFO: Record<ExerciseType, { label: string; emoji: string; desc: 
   },
 }
 
-export default function ExercisePicker({ groupId, onBack, onStart }: Props) {
+export default function ExercisePicker({ vocab, groupId, onBack, onStart }: Props) {
   const group = GROUPS.find((g) => g.id === groupId)!
-  const entries = VOCAB.filter((v) => group.cats.includes(v.cat))
+  const entries = vocab.filter((v) => group.cats.includes(v.cat))
   const genderableCount = entries.filter(isGenderable).length
   const conjugableCount = entries.filter((e) => e.cat === 'verbo_conjugado').length
 

@@ -45,6 +45,7 @@ export interface VocabEntry {
   possessive_gender?: string
   infinitivo?: string
   persona?: string
+  tense?: string
   id: string
 }
 
@@ -56,8 +57,18 @@ export type ExerciseType =
   | 'completar'
 
 export interface SrsState {
-  box: number // 0..5
+  repetitions: number // repeticiones correctas consecutivas
+  easeFactor: number // factor de facilidad SM-2 (>= 1.3)
+  intervalDays: number // intervalo actual en días
   dueAt: number // epoch ms
+  seen: number
+  correct: number
+}
+
+// Formato viejo (Leitner), guardado en localStorage antes de migrar a SM-2.
+export interface LegacySrsState {
+  box: number
+  dueAt: number
   seen: number
   correct: number
 }
