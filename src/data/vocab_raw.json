@@ -2700,5 +2700,243 @@
     "es": "museo",
     "cat": "sustantivo",
     "gender": "m"
+  },
+  {
+    "fr": "moi",
+    "es": "mí, yo",
+    "cat": "pronombre_tonico"
+  },
+  {
+    "fr": "toi",
+    "es": "ti, tú",
+    "cat": "pronombre_tonico"
+  },
+  {
+    "fr": "faites",
+    "es": "hechas, confíe, (usted) haga",
+    "cat": "verbo_conjugado",
+    "infinitivo": "faire",
+    "persona": "usted/ustedes"
+  },
+  {
+    "fr": "fais",
+    "es": "haz, cometo, ejercítate, haces",
+    "cat": "verbo_conjugado",
+    "infinitivo": "faire",
+    "persona": "yo/tú"
+  },
+  {
+    "fr": "allez",
+    "es": "vaya, vayan (impératif), vaya (impératif)",
+    "cat": "verbo_conjugado",
+    "infinitivo": "aller",
+    "persona": "usted/ustedes"
+  },
+  {
+    "fr": "prends",
+    "es": "cuida, toma (imperativo), tomo, tómate",
+    "cat": "verbo_conjugado",
+    "infinitivo": "prendre",
+    "persona": "yo/tú"
+  },
+  {
+    "fr": "prenez",
+    "es": "lleven, toman, toma, tomen (imperativo)",
+    "cat": "verbo_conjugado",
+    "infinitivo": "prendre",
+    "persona": "usted/ustedes"
+  },
+  {
+    "fr": "vois",
+    "es": "ves, veo",
+    "cat": "verbo_conjugado",
+    "infinitivo": "voir",
+    "persona": "yo/tú"
+  },
+  {
+    "fr": "arrête",
+    "es": "detén, detengas, ataja, para",
+    "cat": "verbo_conjugado",
+    "infinitivo": "arrêter",
+    "persona": "tú"
+  },
+  {
+    "fr": "visiter",
+    "es": "visitar",
+    "cat": "verbo_infinitivo"
+  },
+  {
+    "fr": "entrer",
+    "es": "entrar",
+    "cat": "verbo_infinitivo"
+  },
+  {
+    "fr": "coûter",
+    "es": "costar",
+    "cat": "verbo_infinitivo"
+  },
+  {
+    "fr": "village",
+    "es": "pueblo",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "église",
+    "es": "iglesia",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "lunettes",
+    "es": "gafas",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "arbre",
+    "es": "árbol",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "homme",
+    "es": "hombre",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "hôtel",
+    "es": "hotel",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "acteur",
+    "es": "actor",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "actrice",
+    "es": "actriz",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "chanteur",
+    "es": "cantante",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "chanteuse",
+    "es": "cantante, vocalista",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "ticket de caisse",
+    "es": "recibo",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "centime",
+    "es": "centavo",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "vendredi",
+    "es": "viernes",
+    "cat": "sustantivo",
+    "gender": "m"
+  },
+  {
+    "fr": "triste",
+    "es": "triste",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "blond",
+    "es": "rubio",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "célèbre",
+    "es": "famoso",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "vrai",
+    "es": "verdad",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "gratuit",
+    "es": "gratuito",
+    "cat": "adjetivo"
+  },
+  {
+    "fr": "quel",
+    "es": "qué [exclamativo], (adjetivo) qué, cuál",
+    "cat": "interrogativo"
+  },
+  {
+    "fr": "quelle",
+    "es": "cuál, qué [exclamativo], (adjetivo) qué",
+    "cat": "interrogativo"
+  },
+  {
+    "fr": "combien",
+    "es": "cuánto",
+    "cat": "interrogativo"
+  },
+  {
+    "fr": "à la campagne",
+    "es": "en el campo",
+    "cat": "preposicion_frase"
+  },
+  {
+    "fr": "à droite de",
+    "es": "a la derecha de, a la derecha del",
+    "cat": "preposicion_frase"
+  },
+  {
+    "fr": "à gauche de",
+    "es": "a la izquierda del, a la izquierda de",
+    "cat": "preposicion_frase"
+  },
+  {
+    "fr": "en promotion",
+    "es": "en promoción",
+    "cat": "preposicion_frase"
+  },
+  {
+    "fr": "en fait",
+    "es": "de hecho (adverbio)",
+    "cat": "adverbio"
+  },
+  {
+    "fr": "blague",
+    "es": "broma",
+    "cat": "sustantivo",
+    "gender": "f"
+  },
+  {
+    "fr": "vingt",
+    "es": "veinte",
+    "cat": "numero"
+  },
+  {
+    "fr": "ça",
+    "es": "eso",
+    "cat": "indefinido"
+  },
+  {
+    "fr": "ça fait",
+    "es": "son, hace",
+    "cat": "expresion"
   }
 ]
