@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { GROUPS } from '../data/categories'
 import { buildExampleSentence } from '../data/examples'
 import SessionComplete from './SessionComplete'
+import SpeakButton from '../components/SpeakButton'
 import { pick } from '../lib/exercises'
 import { getState, isMastered, masteryLabel, reviewCard } from '../lib/srs'
 import type { SrsStore, VocabEntry } from '../types'
@@ -129,11 +130,17 @@ export default function Flashcards({
           {masteryLabel(state.repetitions)}
         </span>
         {!flipped ? (
-          <h2 className="text-3xl font-bold">{entry.fr}</h2>
+          <div className="flex items-center gap-2">
+            <h2 className="text-3xl font-bold">{entry.fr}</h2>
+            <SpeakButton text={entry.fr} />
+          </div>
         ) : (
           <>
             <h2 className="text-2xl font-bold text-sky-400">{entry.es}</h2>
-            <p className="text-slate-500 text-sm mt-3">{entry.fr}</p>
+            <div className="flex items-center gap-1 mt-3">
+              <p className="text-slate-500 text-sm">{entry.fr}</p>
+              <SpeakButton text={entry.fr} className="w-6 h-6 text-sm" />
+            </div>
             {example && (
               <p className="text-slate-500 text-xs mt-4 italic">Ejemplo: {example.fr}</p>
             )}

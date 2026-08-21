@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { GROUPS } from '../data/categories'
+import SpeakButton from '../components/SpeakButton'
 import {
   applyCoopResult,
   buildDuelQuestions,
@@ -450,7 +451,10 @@ function DuelGame({
           Turno de {names[question.playerIndex]} {doubleNext && <span className="text-amber-400">· ✨ vale doble</span>}
         </p>
         <p className="text-xs text-slate-400 mb-2">{question.promptLabel}</p>
-        <h2 className="text-2xl font-semibold mb-6">{question.prompt}</h2>
+        <div className="flex items-center gap-2 mb-6">
+          <h2 className="text-2xl font-semibold">{question.prompt}</h2>
+          {question.promptLabel === '¿Qué significa?' && <SpeakButton text={question.prompt} />}
+        </div>
         <div className="grid gap-2">
           {question.options.map((opt) => {
             let cls = 'border-slate-700 bg-slate-800/60 hover:border-sky-600'
@@ -475,8 +479,11 @@ function DuelGame({
         </div>
 
         {checked && (
-          <p role="status" className={`mt-4 text-sm ${isCorrect ? 'text-emerald-400' : 'text-rose-400'}`}>
+          <p role="status" className={`mt-4 text-sm flex items-center gap-1 ${isCorrect ? 'text-emerald-400' : 'text-rose-400'}`}>
             {isCorrect ? '¡Correcto!' : `Respuesta correcta: ${question.answer}`}
+            {question.promptLabel !== '¿Qué significa?' && (
+              <SpeakButton text={question.answer} className="w-6 h-6 text-sm" />
+            )}
           </p>
         )}
 

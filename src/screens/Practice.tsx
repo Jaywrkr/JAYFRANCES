@@ -3,6 +3,7 @@ import { GROUPS } from '../data/categories'
 import { generateConjugationEntries, TENSE_LABEL, type Tense } from '../data/conjugations'
 import { buildExampleSentence } from '../data/examples'
 import SessionComplete from './SessionComplete'
+import SpeakButton from '../components/SpeakButton'
 import {
   buildCompletarQuestion,
   buildConjugationQuestion,
@@ -198,7 +199,10 @@ export default function Practice({
         {question.kind === 'mc' && (
           <>
             <p className="text-xs text-slate-400 mb-2">{question.promptLabel}</p>
-            <h2 className="text-2xl font-semibold mb-6">{question.prompt}</h2>
+            <div className="flex items-center gap-2 mb-6">
+              <h2 className="text-2xl font-semibold">{question.prompt}</h2>
+              {question.promptLabel === '¿Qué significa?' && <SpeakButton text={question.prompt} />}
+            </div>
             <div className="grid gap-2">
               {question.options.map((opt) => (
                 <OptionButton
@@ -217,7 +221,10 @@ export default function Practice({
         {question.kind === 'gender' && (
           <>
             <p className="text-xs text-slate-400 mb-2">¿Masculino o femenino? ({question.hintEs})</p>
-            <h2 className="text-3xl font-bold mb-6 text-center">{question.word}</h2>
+            <div className="flex items-center justify-center gap-2 mb-6">
+              <h2 className="text-3xl font-bold text-center">{question.word}</h2>
+              <SpeakButton text={question.word} />
+            </div>
             <div className="grid grid-cols-2 gap-3">
               <OptionButton
                 label="🔵 Masculino (le / un)"
@@ -290,15 +297,16 @@ export default function Practice({
               className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-lg outline-none focus:border-sky-500"
             />
             {checked && (
-              <p role="status" className={`mt-3 text-sm ${isCorrect() ? 'text-emerald-400' : 'text-rose-400'}`}>
+              <p role="status" className={`mt-3 text-sm flex items-center gap-1 ${isCorrect() ? 'text-emerald-400' : 'text-rose-400'}`}>
                 {isCorrect() ? '¡Correcto!' : `Respuesta correcta: ${question.answer}`}
+                <SpeakButton text={question.answer} className="w-6 h-6 text-sm" />
               </p>
             )}
           </>
         )}
 
         {checked && question.kind !== 'completar' && (
-          <p role="status" className={`mt-4 text-sm ${isCorrect() ? 'text-emerald-400' : 'text-rose-400'}`}>
+          <p role="status" className={`mt-4 text-sm flex items-center gap-1 ${isCorrect() ? 'text-emerald-400' : 'text-rose-400'}`}>
             {isCorrect()
               ? '¡Correcto!'
               : `Respuesta correcta: ${
@@ -308,6 +316,9 @@ export default function Practice({
                       : 'Femenino (la / une)'
                     : (question as { answer: string }).answer
                 }`}
+            {(question.kind === 'conj' || (question.kind === 'mc' && question.promptLabel !== '¿Qué significa?')) && (
+              <SpeakButton text={(question as { answer: string }).answer} className="w-6 h-6 text-sm" />
+            )}
           </p>
         )}
 
